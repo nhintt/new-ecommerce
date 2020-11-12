@@ -51,7 +51,10 @@ class GalleryController extends Controller
         $product_id = $request->pro_id;
         $gallery = Gallery::where('product_id', $product_id)->get();
         $gallery_count = $gallery->count();
-        $output = '<table class="table table-hover">
+        $output = '
+        <form>
+                    '.csrf_field().'
+        <table class="table table-hover">
                         <thead>
                         <tr>
                             <th>STT</th>
@@ -66,20 +69,42 @@ class GalleryController extends Controller
             $i = 0;
             foreach($gallery as $key => $gal){
                 $i++;
-                $output.='<tr>
+                $output.='
+
+                        <tr>
                             <td>'.$i.'</td>
-                            <td>'.$gal->gallery_name.'</td>
+                            <td contenteditable class="edit_gal_name" data-gal_id="'.$gal->gallery_id.'">'.$gal->gallery_name.'</td>
                             <td><img src="'.url('public/uploads/gallery/'.$gal->gallery_image).'" class="img-thumbnail" width="120" height="120"></td>
-                            <td><button data-gal_id="'.$gal->gallery_id.'" class="btn btn-xs btn-danger delete-gallery">Xóa</button></td>
+                            <td><button type="button" data-gal_id="'.$gal->gallery_id.'" class="btn btn-xs btn-danger delete-gallery">Xóa</button></td>
                         </tr>
                 ';
             }
         }else{
             $output.='<tr>
-            <td colspan="4">Sản phẩm này chưa có thư viện ảnh</td>
-        </tr>
+                        <td colspan="4">Sản phẩm này chưa có thư viện ảnh</td>
+                    </tr>
             ';
         }
+            $output.='
+                </tbody>
+                </table>
+                </form>
+            ';
         echo $output;
+    }
+
+    public function update_gallery_name(Request $request){
+        $gal_id = $request->gal_id;
+        $gal_text = $request->gal_text;
+        $gallery = Gallery::find($gal_id);
+        $gallery->gallery_name = $gal_text;
+        $gallery->save();
+    }
+
+    public function delete_gallery(Request $request){
+        $gal_id = $request->gal_id;
+        $gallery = Gallery::find($gal_id);
+        unlink('public/uploads/gallery/'.$gallery->gallery_image);
+        $gallery->delete();
     }
 }

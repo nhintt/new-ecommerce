@@ -242,6 +242,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 return false;
             }
         });
+
+        $(document).on('blur', '.edit_gal_name' ,function(){
+            var gal_id = $(this).data('gal_id');
+            var gal_text = $(this).text();
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url:"{{url('/update-gallery-name')}}",
+                method:"POST",
+                data:{gal_id:gal_id, gal_text:gal_text,_token:_token},
+                success:function(data){
+                    load_gallery();
+                    $('#error_gallery').html('<span class="text-danger">Cập nhật tên hình ảnh thành công</span>');
+                }
+            });
+        });
+
+        $(document).on('click', '.delete-gallery' ,function(){
+            var gal_id = $(this).data('gal_id');
+            var _token = $('input[name="_token"]').val();
+
+            if(confirm('Bạn có chắc chắn xóa hình ảnh này không?')){
+                $.ajax({
+                    url:"{{url('/delete-gallery')}}",
+                    method:"POST",
+                    data:{gal_id:gal_id,_token:_token},
+                    success:function(data){
+                        load_gallery();
+                        $('#error_gallery').html('<span class="text-danger">Xóa hình ảnh thành công</span>');
+                    }
+                });
+            }
+        });
     });
 </script>
 
