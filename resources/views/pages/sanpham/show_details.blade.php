@@ -5,7 +5,7 @@
                     <style type="text/css">
                         .lSSlideOuter .lSPager.lSGallery img {
                             display: block;
-                            height: 150px;
+                            height: 140px;
                             max-width: 100%;
                         }
                         li.active{
@@ -15,16 +15,11 @@
                     </style>
 						<div class="col-sm-5">
                         <ul id="imageGallery">
-                            <li data-thumb="{{asset('public/frontend/images/1.jpg')}}" data-src="{{asset('public/frontend/images/1.jpg')}}">
-                                <img width="100%" src="{{asset('public/frontend/images/1.jpg')}}" />
+                        @foreach ($gallery as $key => $gal)
+                            <li data-thumb="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" data-src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}">
+                                <img width="100%" alt="{{$gal->gallery_name}}" src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" />
                             </li>
-                            <li data-thumb="{{asset('public/frontend/images/123.jpg')}}" data-src="{{asset('public/frontend/images/123.jpg')}}">
-                                <img width="100%" src="{{asset('public/frontend/images/123.jpg')}}" />
-                            </li>
-                            <li data-thumb="{{asset('public/frontend/images/1.jpg')}}" data-src="{{asset('public/frontend/images/1.jpg')}}">
-                                <img width="100%" src="{{asset('public/frontend/images/1.jpg')}}" />
-                            </li>
-
+                        @endforeach
                         </ul>
 
 						</div>
