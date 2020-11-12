@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Frontend 
+//Frontend
 Route::get('/','HomeController@index' );
 Route::get('/trang-chu','HomeController@index');
 Route::get('/404','HomeController@error_page');
@@ -41,7 +41,7 @@ Route::post('/import-csv','CategoryProduct@import_csv');
 Route::get('/unactive-category-product/{category_product_id}','CategoryProduct@unactive_category_product');
 Route::get('/active-category-product/{category_product_id}','CategoryProduct@active_category_product');
 
-//Send Mail 
+//Send Mail
 Route::get('/send-mail','HomeController@send_mail');
 
 //Login facebook
@@ -151,5 +151,10 @@ Route::get('/delete-slide/{slide_id}','SliderController@delete_slide');
 Route::post('/insert-slider','SliderController@insert_slider');
 Route::get('/unactive-slide/{slide_id}','SliderController@unactive_slide');
 Route::get('/active-slide/{slide_id}','SliderController@active_slide');
+
+//Gallery
+Route::get('/add-gallery/{product_id}', 'GalleryController@add_gallery');
+Route::post('/select-gallery', 'GalleryController@select_gallery');
+Route::post('/insert-gallery/{pro_id}', 'GalleryController@insert_gallery');
 
 

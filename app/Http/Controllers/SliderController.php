@@ -19,7 +19,7 @@ class SliderController extends Controller
         }
     }
     public function manage_slider(){
-    	$all_slide = Slider::orderBy('slider_id','DESC')->paginate(2);
+    	$all_slide = Slider::orderBy('slider_id','DESC')->paginate(5);
     	return view('admin.slider.list_slider')->with(compact('all_slide'));
     }
     public function add_slider(){
@@ -41,12 +41,12 @@ class SliderController extends Controller
     }
 
     public function insert_slider(Request $request){
-    	
+
     	$this->AuthLogin();
 
    		$data = $request->all();
        	$get_image = request('slider_image');
-      
+
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
@@ -65,7 +65,7 @@ class SliderController extends Controller
         	Session::put('message','Làm ơn thêm hình ảnh');
     		return Redirect::to('add-slider');
         }
-       	
+
     }
     public function delete_slide(Request $request, $slide_id){
         $slider = Slider::find($slide_id);

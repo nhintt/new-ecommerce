@@ -10,8 +10,8 @@
     <link  rel="canonical" href="{{$url_canonical}}" />
     <meta name="author" content="">
     <link  rel="icon" type="image/x-icon" href="" />
-    
-    {{--   <meta property="og:image" content="{{$image_og}}" />  
+
+    {{--   <meta property="og:image" content="{{$image_og}}" />
       <meta property="og:site_name" content="http://localhost/tutorial_youtube/shopbanhanglaravel" />
       <meta property="og:description" content="{{$meta_desc}}" />
       <meta property="og:title" content="{{$meta_title}}" />
@@ -26,13 +26,17 @@
     <link href="{{asset('public/frontend/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
-     <link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
-   
+    <link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
+    <link href="{{asset('public/frontend/css/lightgallery.min.css')}}" rel="stylesheet">
+    <link href="{{asset('public/frontend/css/lightslider.css')}}" rel="stylesheet">
+    <link href="{{asset('public/frontend/css/prettify.css')}}" rel="stylesheet">
+
+
 
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
-    <![endif]-->       
+    <![endif]-->
     <link rel="shortcut icon" href="{{('public/frontend/images/favicon.ico')}}">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -68,7 +72,7 @@
                 </div>
             </div>
         </div><!--/header_top-->
-        
+
         <div class="header-middle"><!--header-middle-->
             <div class="container">
                 <div class="row">
@@ -87,7 +91,7 @@
                                     <li><a href="#">UK</a></li>
                                 </ul>
                             </div>
-                            
+
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
                                     DOLLAR
@@ -103,50 +107,50 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                               
+
                                 <li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
                                 <?php
                                    $customer_id = Session::get('customer_id');
                                    $shipping_id = Session::get('shipping_id');
-                                   if($customer_id!=NULL && $shipping_id==NULL){ 
+                                   if($customer_id!=NULL && $shipping_id==NULL){
                                  ?>
                                   <li><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
-                                
+
                                 <?php
                                  }elseif($customer_id!=NULL && $shipping_id!=NULL){
                                  ?>
                                  <li><a href="{{URL::to('/payment')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
-                                 <?php 
+                                 <?php
                                 }else{
                                 ?>
                                  <li><a href="{{URL::to('/dang-nhap')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
                                 <?php
                                  }
                                 ?>
-                                
+
 
                                 <li><a href="{{URL::to('/gio-hang')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                                 <?php
                                    $customer_id = Session::get('customer_id');
-                                   if($customer_id!=NULL){ 
+                                   if($customer_id!=NULL){
                                  ?>
                                   <li><a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
-                                
+
                                 <?php
                             }else{
                                  ?>
                                  <li><a href="{{URL::to('/dang-nhap')}}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
-                                 <?php 
+                                 <?php
                              }
                                  ?>
-                               
+
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div><!--/header-middle-->
-    
+
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
@@ -168,10 +172,10 @@
                                         <li><a href="{{URL::to('/danh-muc/'.$danhmuc->slug_category_product)}}">{{$danhmuc->category_name}}</a></li>
                                         @endforeach
                                     </ul>
-                                </li> 
+                                </li>
                                 <li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
-                                    
-                                </li> 
+
+                                </li>
                                 <li><a href="{{URL::to('/gio-hang')}}">Giỏ hàng</a></li>
                                 <li><a href="{{URL::to('/lien-he')}}">Liên hệ</a></li>
                             </ul>
@@ -190,7 +194,7 @@
             </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
-    
+
     <section id="slider"><!--slider-->
         <div class="container">
             <div class="row">
@@ -207,25 +211,25 @@
                             }
                         </style>
                         <div class="carousel-inner">
-                        @php 
+                        @php
                             $i = 0;
                         @endphp
                         @foreach($slider as $key => $slide)
-                            @php 
+                            @php
                                 $i++;
                             @endphp
                             <div class="item {{$i==1 ? 'active' : '' }}">
-                                
+
                                 <div class="col-sm-12">
                                     <img alt="{{$slide->slider_desc}}" src="{{asset('public/uploads/slider/'.$slide->slider_image)}}" height="200" width="100%" class="img img-responsive img-slider">
-                                   
+
                                 </div>
                             </div>
-                        @endforeach  
-                          
-                            
+                        @endforeach
+
+
                         </div>
-                        
+
                         <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
                             <i class="fa fa-angle-left"></i>
                         </a>
@@ -233,12 +237,12 @@
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
     </section><!--/slider-->
-    
+
     <section>
         <div class="container">
             <div class="row">
@@ -247,7 +251,7 @@
                         <h2>Danh mục sản phẩm</h2>
                         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
                           @foreach($category as $key => $cate)
-                           
+
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a href="{{URL::to('/danh-muc/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a></h4>
@@ -255,7 +259,7 @@
                             </div>
                         @endforeach
                         </div><!--/category-products-->
-                    
+
                         <div class="brands_products"><!--brands_products-->
                             <h2>Thương hiệu sản phẩm</h2>
                             <div class="brands-name">
@@ -266,21 +270,21 @@
                                 </ul>
                             </div>
                         </div><!--/brands_products-->
-                        
-                     
-                    
+
+
+
                     </div>
                 </div>
-                
+
                 <div class="col-sm-9 padding-right">
 
                    @yield('content')
-                    
+
                 </div>
             </div>
         </div>
     </section>
-    
+
     <footer id="footer"><!--Footer-->
         <div class="footer-top">
             <div class="container">
@@ -306,7 +310,7 @@
                                 <h2>24 DEC 2014</h2>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                                 <a href="#">
@@ -321,7 +325,7 @@
                                 <h2>24 DEC 2014</h2>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                                 <a href="#">
@@ -336,7 +340,7 @@
                                 <h2>24 DEC 2014</h2>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                                 <a href="#">
@@ -361,7 +365,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-widget">
             <div class="container">
                 <div class="row">
@@ -423,11 +427,11 @@
                             </form>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
@@ -436,17 +440,20 @@
                 </div>
             </div>
         </div>
-        
-    </footer><!--/Footer-->
-    
 
-  
+    </footer><!--/Footer-->
+
+
+
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
     <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.scrollUp.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/price-range.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+    <script src="{{asset('public/frontend/js/lightgallery-all.min.js')}}"></script>
+    <script src="{{asset('public/frontend/js/lightslider.js')}}"></script>
+    <script src="{{asset('public/frontend/js/prettify.js')}}"></script>
 
 
     <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
@@ -456,6 +463,25 @@
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
 
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#imageGallery').lightSlider({
+        gallery:true,
+        item:1,
+        loop:true,
+        thumbItem:9,
+        slideMargin:0,
+        enableDrag: false,
+        currentPagerPosition:'left',
+        onSliderLoad: function(el) {
+            el.lightGallery({
+                selector: '#imageGallery .lslide'
+            });
+        }
+    });
+  });
+</script>
 
     <script type="text/javascript">
 
@@ -494,7 +520,7 @@
                             }
                         });
 
-                        window.setTimeout(function(){ 
+                        window.setTimeout(function(){
                             location.reload();
                         } ,3000);
 
@@ -502,13 +528,13 @@
                         swal("Đóng", "Đơn hàng chưa được gửi, làm ơn hoàn tất đơn hàng", "error");
 
                       }
-              
+
                 });
 
-               
+
             });
         });
-    
+
 
     </script>
     <script type="text/javascript">
@@ -552,7 +578,7 @@
                     });
                 }
 
-                
+
             });
         });
     </script>
@@ -563,7 +589,7 @@
             var ma_id = $(this).val();
             var _token = $('input[name="_token"]').val();
             var result = '';
-           
+
             if(action=='city'){
                 result = 'province';
             }else{
@@ -574,12 +600,12 @@
                 method: 'POST',
                 data:{action:action,ma_id:ma_id,_token:_token},
                 success:function(data){
-                   $('#'+result).html(data);     
+                   $('#'+result).html(data);
                 }
             });
         });
         });
-          
+
     </script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -596,13 +622,13 @@
                     method: 'POST',
                     data:{matp:matp,maqh:maqh,xaid:xaid,_token:_token},
                     success:function(){
-                       location.reload(); 
+                       location.reload();
                     }
                     });
-                } 
+                }
         });
     });
     </script>
-  
+
 </body>
 </html>
