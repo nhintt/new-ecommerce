@@ -182,11 +182,13 @@
                         </div>
                     </div>
                     <div class="col-sm-5">
-                        <form action="{{URL::to('/tim-kiem')}}" method="POST">
+                        <form action="{{URL::to('/tim-kiem')}}" autocomplete="off" method="POST">
                             {{csrf_field()}}
-                        <div class="search_box pull-right">
-                            <input type="text" name="keywords_submit" placeholder="Tìm kiếm sản phẩm"/>
-                            <input type="submit" style="margin-top:0;color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
+                        <div class="search_box">
+                            <input type="text" style="width: 100%" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm"/>
+                            <div id="search-ajax"></div>
+
+                            <input type="submit" style="margin-top:4px;color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
                         </div>
                         </form>
                     </div>
@@ -462,6 +464,32 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
+
+<script type="text/javascript">
+    $('#keywords').keyup(function(){
+        var query = $(this).val();
+        if(query != '')
+        {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: '{{url('/autocomplete-ajax')}}',
+                method: 'POST',
+                data:{query:query, _token:_token},
+                success: function(data){
+                    $('#search-ajax').fadeIn();
+                    $('#search-ajax').html(data);
+                }
+            });
+        }
+        else{
+            $('#search-ajax').fadeOut();
+        }
+    });
+    $(document).on('click', '.li_search_ajax', function(){
+        $('#keywords').val($(this).text());
+        $('#search-ajax').fadeOut();
+    });
+</script>
 
 
 <script type="text/javascript">
