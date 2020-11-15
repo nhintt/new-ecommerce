@@ -170,7 +170,6 @@ class ProductController extends Controller
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_slug',[$product_slug])->orderby(DB::raw('RAND()'))->paginate(3);
 
-
         return view('pages.sanpham.show_details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('gallery', $gallery)->with('video',$video);
 
     }
