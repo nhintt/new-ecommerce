@@ -182,6 +182,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                     </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Video</span>
+                    </a>
+                    <ul class="sub">
+                         <li><a href="{{URL::to('/list-video')}}">Thêm video</a></li>
+
+                    </ul>
+                </li>
 
             </ul>            </div>
         <!-- sidebar menu end-->
@@ -207,7 +217,96 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script type="text/javascript">
     $(document).ready(function(){
+        load_video();
+
+        function load_video(){
+
+            $.ajax({
+                url:"{{url('/select-video')}}",
+                method:"POST",
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(data){
+                    $('#video_load').html(data);
+                }
+            });
+        }
+
+        $(document).on('click', '.btn-add-video', function(){
+            var video_title = $('.video_title').val();
+            var video_slug = $('.video_slug').val();
+            var video_link = $('.video_link').val();
+            var video_desc = $('.video_desc').val();
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url:"{{url('/insert-video')}}",
+                method:"POST",
+                data:{video_title:video_title, video_slug:video_slug, video_link:video_link, video_desc:video_desc, _token:_token},
+                success:function(data){
+                    load_video();
+                    $('#notify').html('<span class="text text-success">Thêm video thành công</span>')
+                }
+            });
+        });
+
+        $(document).on('click', '.btn-delete-video', function(){
+            var video_id = $(this).data('video_id');
+            if(confirm('Bạn có muốn xóa video này không?')){
+                $.ajax({
+                    url:"{{url('/delete-video')}}",
+                    method:"POST",
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{video_id:video_id},
+                    success:function(data){
+                        load_video();
+                        $('#notify').html('<span class="text text-success">Xóa video thành công</span>')
+                    }
+                });
+            }
+        });
+
+        $(document).on('blur', '.video_edit', function(){
+            var video_type = $(this).data('video_type');
+            var video_id = $(this).data('video_id');
+
+            if(video_type == 'video_title'){
+                var video_edit = $('#'+video_type+'_'+video_id).text();
+                var video_check = video_type;
+            }else if(video_type == 'video_desc'){
+                var video_edit = $('#'+video_type+'_'+video_id).text();
+                var video_check = video_type;
+            }else if(video_type == 'video_link'){
+                var video_edit = $('#'+video_type+'_'+video_id).text();
+                var video_check = video_type;
+            }else{
+                var video_edit = $('#'+video_type+'_'+video_id).text();
+                var video_check = video_type;
+            }
+
+            $.ajax({
+                url:"{{url('/update-video')}}",
+                method:"POST",
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{video_edit:video_edit, video_id:video_id, video_check:video_check},
+                success:function(data){
+                    load_video();
+                    $('#notify').html('<span class="text text-success">Cập nhật video thành công</span>')
+                }
+            });
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
         load_gallery();
+
         function load_gallery(){
             var pro_id = $('.pro_id').val();
             var _token = $('input[name="_token"]').val();

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use App\Slider;
+use App\Video;
 use App\Gallery;
 use File;
 use App\Http\Requests;
@@ -39,7 +40,6 @@ class ProductController extends Controller
         ->orderby('tbl_product.product_id','desc')->paginate(5);
     	$manager_product  = view('admin.all_product')->with('all_product',$all_product);
     	return view('admin_layout')->with('admin.all_product', $manager_product);
-
     }
     public function save_product(Request $request){
          $this->AuthLogin();
@@ -141,7 +141,7 @@ class ProductController extends Controller
     public function details_product($product_slug , Request $request){
          //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-
+        $video = Video::orderBy('video_id','desc')->take(4)->get();
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
@@ -171,7 +171,7 @@ class ProductController extends Controller
         ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_slug',[$product_slug])->orderby(DB::raw('RAND()'))->paginate(3);
 
 
-        return view('pages.sanpham.show_details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('gallery', $gallery);
+        return view('pages.sanpham.show_details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('gallery', $gallery)->with('video',$video);
 
     }
 }
