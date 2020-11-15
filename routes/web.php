@@ -16,6 +16,7 @@ Route::get('/trang-chu','HomeController@index');
 Route::get('/404','HomeController@error_page');
 Route::post('/tim-kiem','HomeController@search');
 Route::get('/videos/{video_slug}','HomeController@show_video');
+Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
 
 //Danh muc san pham trang chu
 Route::get('/danh-muc/{slug_category_product}','CategoryProduct@show_category_home');

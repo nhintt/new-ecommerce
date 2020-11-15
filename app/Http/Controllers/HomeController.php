@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Mail;
 use App\Slider;
 use App\Video;
+use App\Product;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 
@@ -35,6 +36,7 @@ class HomeController extends Controller
     }
 
     public function index(Request $request){
+
         //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
         $video = Video::orderby('video_id','desc')->take(4)->get();
@@ -59,7 +61,7 @@ class HomeController extends Controller
         // return view('pages.home')->with(compact('cate_product','brand_product','all_product')); //2
     }
     public function search(Request $request){
-         //slide
+        //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
         $video = Video::orderby('video_id','desc')->take(4)->get();
         //seo
@@ -79,5 +81,22 @@ class HomeController extends Controller
         return view('pages.sanpham.search')->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('video',$video);
 
     }
+    public function autocomplete_ajax(Request $request){
+        $data = $request->all();
+        if($data['query']){
+            $product = Product::where('product_status',0)->where('product_name','LIKE','%'.$data['query'].'%')->get();
+            $output = '
+            <ul class="dropdown-menu" style="display:block; position:relative">
+            ';
 
+            foreach($product as $key => $val){
+                $output .= '
+                <li class="li_search_ajax"><a href="#">'.$val->product_name.'</a></li>
+                ';
+            }
+
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
 }
