@@ -421,6 +421,18 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        $('#sort').on('change', function(){
+            var url = $(this).val();
+            if(url){
+                window.location = url;
+            }
+            return false;
+        });
+    });
+</script>
+
+<script type="text/javascript">
     function view(){
         if(localStorage.getItem('data')!= null){
             var data = JSON.parse(localStorage.getItem('data'));

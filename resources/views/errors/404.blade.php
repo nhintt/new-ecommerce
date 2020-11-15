@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>404 ko tìm thấy</title>
+	<title>404 không tìm thấy</title>
 </head>
 <body>
 	<style>
@@ -11,6 +11,6 @@
 			text-align: center;
 		}
 	</style>
-	<h1>404 ko tìm thấy</h1>
+	<h1>404 không tìm thấy</h1>
 </body>
 </html>

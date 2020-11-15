@@ -11,5 +11,9 @@ class Product extends Model
     	'product_name', 'product_slug','category_id','brand_id','product_desc','product_content','product_price','product_image','product_status'
     ];
     protected $primaryKey = 'product_id';
- 	protected $table = 'tbl_product';
+     protected $table = 'tbl_product';
+
+     public function category(){
+         return $this->belongsTo('App\CategoryProductModel', 'category_id');
+     }
 }
