@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use App\Slider;
+use App\Video;
 use App\Gallery;
+use App\Product;
 use File;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -20,6 +22,25 @@ class ProductController extends Controller
         }else{
             return Redirect::to('admin')->send();
         }
+    }
+    public function quickview(Request $request){
+        $product_id = $request->product_id;
+        $product = Product::find($product_id);
+        $gallery = Gallery::where('product_id',$product_id)->get();
+
+        $output['product_gallery'] = '';
+        foreach($gallery as $key => $gal){
+            $output['product_gallery'] = '<p><img width="100%" src="public/uploads/gallery/'.$gal->gallery_image.'"></p>';
+        }
+
+        $output['product_name'] = $product->product_name;
+        $output['product_id'] = $product->product_id;
+        $output['product_desc'] = $product->product_desc;
+        $output['product_content'] = $product->product_content;
+        $output['product_price'] = number_format($product->product_price,0,',','.').'VNĐ';
+        $output['product_image'] = '<p><img width="100%" src="public/uploads/product/'.$product->product_image.'"></p>';
+
+        echo json_encode($output);
     }
     public function add_product(){
         $this->AuthLogin();
@@ -39,7 +60,6 @@ class ProductController extends Controller
         ->orderby('tbl_product.product_id','desc')->paginate(5);
     	$manager_product  = view('admin.all_product')->with('all_product',$all_product);
     	return view('admin_layout')->with('admin.all_product', $manager_product);
-
     }
     public function save_product(Request $request){
          $this->AuthLogin();
@@ -141,7 +161,7 @@ class ProductController extends Controller
     public function details_product($product_slug , Request $request){
          //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-
+        $video = Video::orderBy('video_id','desc')->take(4)->get();
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
@@ -170,8 +190,7 @@ class ProductController extends Controller
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_slug',[$product_slug])->orderby(DB::raw('RAND()'))->paginate(3);
 
-
-        return view('pages.sanpham.show_details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('gallery', $gallery);
+        return view('pages.sanpham.show_details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('gallery', $gallery)->with('video',$video);
 
     }
 }

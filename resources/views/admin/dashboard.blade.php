@@ -78,10 +78,10 @@
         <div class="row">
             <div class="col-md-4 col-xs-12">
                 <p class="title-thongke">Thống kê tổng sản phẩm bài viết đơn hàng</p>
-                <div id="donut" class="morris-donut-inverse"></div>
+                <div id="donut"></div>
             </div>
 
-            <div class="col-md-4 col-xs-12">
+            {{-- <div class="col-md-4 col-xs-12">
                 <h3>Bài viết xem nhiều</h3>
                 <ol class="list_views">
                     @foreach ($post_views as $key => $post)
@@ -91,9 +91,9 @@
                         </li>
                     @endforeach
                 </ol>
-            </div>
+            </div> --}}
 
-            <div class="col-md-4 col-xs-12">
+            {{-- <div class="col-md-4 col-xs-12">
                 <style type="text/css">
                     ol.list_views {
                         margin: 10px 0;
@@ -104,7 +104,7 @@
                         font-weight: 400
                     }
                 </style>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

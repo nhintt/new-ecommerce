@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Slider;
+use App\Video;
+use App\Gallery;
 use App\Exports\ExcelExports;
 use App\Imports\ExcelImports;
 use Excel;
-use CategoryProductModel;
+use App\CategoryProductModel;
+use App\Product;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -93,13 +96,41 @@ class CategoryProduct extends Controller
     public function show_category_home(Request $request ,$slug_category_product){
        //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $video = Video::orderBy('video_id','desc')->take(4)->get();
 
-        $category_by_id = DB::table('tbl_product')->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')->where('tbl_category_product.slug_category_product',$slug_category_product)->paginate(6);
+        $category_by_slug = CategoryProductModel::where('slug_category_product', $slug_category_product)->get();
 
+        $min_price = Product::min('product_price');
+        $max_price = Product::max('product_price');
 
+        foreach($category_by_slug as $key => $cate){
+            $category_id = $cate->category_id;
+        }
+
+        if(isset($_GET['sort_by'])){
+            $sort_by = $_GET['sort_by'];
+
+            if($sort_by == 'giam_dan'){
+                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_price', 'DESC')->paginate(6)->appends(request()->query());
+            }else if($sort_by == 'tang_dan'){
+                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_price', 'ASC')->paginate(6)->appends(request()->query());
+            }else if($sort_by == 'kytu_za'){
+                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_name', 'DESC')->paginate(6)->appends(request()->query());
+            }else if($sort_by == 'kytu_az'){
+                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_name', 'ASC')->paginate(6)->appends(request()->query());
+            }
+        }
+        else if(isset($_GET['start_price']) && $_GET['end_price']){
+            $min_price = $_GET['start_price'];
+            $max_price = $_GET['end_price'];
+
+            $category_by_id = Product::with('category')->whereBetween('product_price', [$min_price,$max_price])->orderBy('product_id' , 'DESC')->paginate(6);
+        }
+        else{
+            $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_id','DESC')->paginate(6)->appends(request()->query());
+        }
 
         $category_name = DB::table('tbl_category_product')->where('tbl_category_product.slug_category_product',$slug_category_product)->limit(1)->get();
         foreach($category_name as $key => $val){
@@ -110,9 +141,10 @@ class CategoryProduct extends Controller
                 $url_canonical = $request->url();
                 //--seo
                 }
-
-
-        return view('pages.category.show_category')->with('category',$cate_product)->with('brand',$brand_product)->with('category_by_id',$category_by_id)->with('category_name',$category_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider);
+        return view('pages.category.show_category')->with('category',$cate_product)
+        ->with('brand',$brand_product)->with('category_by_id',$category_by_id)->with('category_name',$category_name)
+        ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)
+        ->with('slider',$slider)->with('video',$video)->with('min_price',$min_price)->with('max_price',$max_price);
     }
     public function export_csv(){
         return Excel::download(new ExcelExports , 'category_product.xlsx');

@@ -83,7 +83,8 @@ class GalleryController extends Controller
                 ';
             }
         }else{
-            $output.='<tr>
+            $output.='
+                    <tr>
                         <td colspan="4">Sản phẩm này chưa có thư viện ảnh</td>
                     </tr>
             ';

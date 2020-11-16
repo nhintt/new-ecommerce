@@ -15,11 +15,14 @@ Route::get('/','HomeController@index' );
 Route::get('/trang-chu','HomeController@index');
 Route::get('/404','HomeController@error_page');
 Route::post('/tim-kiem','HomeController@search');
+// Route::get('/videos/{video_slug}','HomeController@show_video');
+Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
 
 //Danh muc san pham trang chu
 Route::get('/danh-muc/{slug_category_product}','CategoryProduct@show_category_home');
 Route::get('/thuong-hieu/{brand_slug}','BrandProduct@show_brand_home');
 Route::get('/chi-tiet/{product_slug}','ProductController@details_product');
+Route::post('/quickview','ProductController@quickview');
 
 //Backend
 Route::get('/admin','AdminController@index');
@@ -163,7 +166,13 @@ Route::post('/update-gallery-name', 'GalleryController@update_gallery_name');
 Route::post('/delete-gallery', 'GalleryController@delete_gallery');
 Route::post('/update-gallery', 'GalleryController@update_gallery');
 
+//Video
+Route::get('/list-video', 'VideoController@list_video');
+Route::post('/select-video', 'VideoController@select_video');
+Route::post('/insert-video', 'VideoController@insert_video');
+Route::post('/update-video', 'VideoController@update_video');
+Route::post('/delete-video', 'VideoController@delete_video');
 
-
-
+//Lien he
+Route::get('/lien-he','ContactController@lien_he');
 

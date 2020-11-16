@@ -30,7 +30,7 @@
     <link href="{{asset('public/frontend/css/lightgallery.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/lightslider.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/prettify.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
     <!--[if lt IE 9]>
@@ -173,20 +173,19 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
-
-                                </li>
                                 <li><a href="{{URL::to('/gio-hang')}}">Giỏ hàng</a></li>
                                 <li><a href="{{URL::to('/lien-he')}}">Liên hệ</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-5">
-                        <form action="{{URL::to('/tim-kiem')}}" method="POST">
+                        <form action="{{URL::to('/tim-kiem')}}" autocomplete="off" method="POST">
                             {{csrf_field()}}
-                        <div class="search_box pull-right">
-                            <input type="text" name="keywords_submit" placeholder="Tìm kiếm sản phẩm"/>
-                            <input type="submit" style="margin-top:0;color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
+                        <div class="search_box">
+                            <input type="text" style="" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm"/>
+
+                            <input type="submit" style="margin-top:3px;color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
+                            <div id="search-ajax"></div>
                         </div>
                         </form>
                     </div>
@@ -271,6 +270,13 @@
                             </div>
                         </div><!--/brands_products-->
 
+                        <div class="brands_products"><!--brands_products-->
+                            <h2>Sản phẩm yêu thích</h2>
+                            <div class="brands-name">
+                                <div id="row_wishlist" class="row"></div>
+                            </div>
+                        </div><!--/brands_products-->
+
 
 
                     </div>
@@ -295,73 +301,21 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                         </div>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-sm-10">
+                    @foreach ($video as $key => $vid)
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
-                                <a href="#">
-                                    <div class="iframe-img">
-                                        <img src="{{('public/frontend/images/iframe1.png')}}" alt="" />
-                                    </div>
-                                    <div class="overlay-icon">
-                                        <i class="fa fa-play-circle-o"></i>
-                                    </div>
-                                </a>
-                                <p>Circle of Hands</p>
-                                <h2>24 DEC 2014</h2>
+                            <a href="#">
+                            <iframe width="200" height="200" src="https://www.youtube.com/embed/{{$vid->video_link}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <h2>{{$vid->video_title}}</h2>
+                                <p>{{$vid->video_desc}}</p>
+                            </a>
                             </div>
                         </div>
+                    @endforeach
 
-                        <div class="col-sm-3">
-                            <div class="video-gallery text-center">
-                                <a href="#">
-                                    <div class="iframe-img">
-                                         <img src="{{('public/frontend/images/iframe2.png')}}" alt="" />
-                                    </div>
-                                    <div class="overlay-icon">
-                                        <i class="fa fa-play-circle-o"></i>
-                                    </div>
-                                </a>
-                                <p>Circle of Hands</p>
-                                <h2>24 DEC 2014</h2>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="video-gallery text-center">
-                                <a href="#">
-                                    <div class="iframe-img">
-                                         <img src="{{('public/frontend/images/iframe3.png')}}" alt="" />
-                                    </div>
-                                    <div class="overlay-icon">
-                                        <i class="fa fa-play-circle-o"></i>
-                                    </div>
-                                </a>
-                                <p>Circle of Hands</p>
-                                <h2>24 DEC 2014</h2>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="video-gallery text-center">
-                                <a href="#">
-                                    <div class="iframe-img">
-                                         <img src="{{('public/frontend/images/iframe4.png')}}" alt="" />
-                                    </div>
-                                    <div class="overlay-icon">
-                                        <i class="fa fa-play-circle-o"></i>
-                                    </div>
-                                </a>
-                                <p>Circle of Hands</p>
-                                <h2>24 DEC 2014</h2>
-                            </div>
-                        </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="address">
-                            <img src="images/home/map.png" alt="" />
-                            <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -445,6 +399,9 @@
 
 
 
+
+
+
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
     <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.scrollUp.min.js')}}"></script>
@@ -454,16 +411,159 @@
     <script src="{{asset('public/frontend/js/lightgallery-all.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/lightslider.js')}}"></script>
     <script src="{{asset('public/frontend/js/prettify.js')}}"></script>
-
-
     <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
+    <script src="{{asset('public/frontend/js/simple.money.format.js')}}"></script>
+
    {{--  <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
     <script>paypal.Buttons().render('body');</script> --}}
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
 
+<!--Lọc giá sản phẩm-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $( "#slider-range" ).slider({
+            orientation: "horizontal",
+            range: true,
+            min: {{$min_price}},
+            max: {{$max_price}},
+            values: [ {{$min_price}}, {{$max_price}} ],
+            step: 10000,
 
+            slide: function( event, ui ){
+                $( "#amount_start" ).val(ui.values[ 0 ] + "đ").simpleMoneyFormat();
+                $( "#amount_end" ).val(ui.values[ 1 ] + "đ").simpleMoneyFormat();
+
+                $( "#start_price" ).val( ui.values[ 0 ]);
+                $( "#end_price" ).val( ui.values[ 1 ]);
+            }
+        });
+            $( "#amount_start" ).val($("#slider-range").slider( "values", 0)+ "đ").simpleMoneyFormat();
+            $( "#amount_end" ).val($("#slider-range").slider( "values", 1)+ "đ").simpleMoneyFormat();
+    });
+</script>
+
+<!--Lọc category theo giá và ký tự-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#sort').on('change', function(){
+            var url = $(this).val();
+            if(url){
+                window.location = url;
+            }
+            return false;
+        });
+    });
+</script>
+
+<!--Wishlist-->
+<script type="text/javascript">
+    function view(){
+        if(localStorage.getItem('data')!= null){
+            var data = JSON.parse(localStorage.getItem('data'));
+            data.reverse();
+            document.getElementById('row_wishlist').style.overflow = 'scroll';
+            document.getElementById('row_wishlist').style.height = '600px';
+
+            for(i=0; i<data.length; i++){
+                var name = data[i].name;
+                var price = data[i].price;
+                var image = data[i].image;
+                var url = data[i].url;
+                $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+name+'</p><p style="color: #FE980F">'+price+'</p><a href="'+url+'">Đặt hàng</a></div></div>');
+            }
+        }
+    }
+    view();
+
+    function add_wishlist(clicked_id){
+        var id = clicked_id;
+        var name = document.getElementById('wishlist_productname'+id).value;
+        var price = document.getElementById('wishlist_productprice'+id).value;
+        var image = document.getElementById('wishlist_productimage'+id).src;
+        var url = document.getElementById('wishlist_producturl'+id).href;
+        var newItem = {
+            'url': url,
+            'id' : id,
+            'name' : name,
+            'price' : price,
+            'image' : image
+        }
+
+        if(localStorage.getItem('data') == null){
+            localStorage.setItem('data', '[]');
+        }
+
+        var old_data = JSON.parse(localStorage.getItem('data'));
+
+        var matches = $.grep(old_data, function(obj){
+            return obj.id == id;
+        })
+
+        if(matches.length){
+            alert('Sản phẩm đã có trong danh sách yêu thích');
+        }else{
+            old_data.push(newItem);
+            $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+newItem.image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+newItem.name+'</p><p style="color: #FE980F">'+newItem.price+'</p><a href="'+newItem.url+'">Đặt hàng</a></div></div>')
+        }
+
+        localStorage.setItem('data', JSON.stringify(old_data));
+    }
+</script>
+
+<!--Autocomplete tìm kiếm-->
+<script type="text/javascript">
+    $('.xemnhanh').click(function(){
+        var product_id = $(this).data('id_product');
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: '{{url('/quickview')}}',
+            method: 'POST',
+            dataType: 'JSON',
+            data:{product_id:product_id, _token:_token},
+            success: function(data){
+                $('#product_quickview_title').html(data.product_name);
+                $('#product_quickview_id').html(data.product_id);
+                $('#product_quickview_price').html(data.product_price);
+                $('#product_quickview_image').html(data.product_image);
+                $('#product_quickview_gallery').html(data.product_gallery);
+                $('#product_quickview_desc').html(data.product_desc);
+                $('#product_quickview_content').html(data.product_content);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $('#keywords').keyup(function(){
+        var query = $(this).val();
+        if(query != '')
+        {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: '{{url('/autocomplete-ajax')}}',
+                method: 'POST',
+                data:{query:query, _token:_token},
+                success: function(data){
+                    $('#search-ajax').fadeIn();
+                    $('#search-ajax').html(data);
+                }
+            });
+        }
+        else{
+            $('#search-ajax').fadeOut();
+        }
+    });
+    $(document).on('click', '.li_search_ajax', function(){
+        $('#keywords').val($(this).text());
+        $('#search-ajax').fadeOut();
+    });
+</script>
+
+<!--Thư viện ảnh-->
 <script type="text/javascript">
 $(document).ready(function() {
     $('#imageGallery').lightSlider({
@@ -483,8 +583,8 @@ $(document).ready(function() {
   });
 </script>
 
-    <script type="text/javascript">
-
+<!--Order-->
+<script type="text/javascript">
           $(document).ready(function(){
             $('.send_order').click(function(){
                 swal({
@@ -534,10 +634,10 @@ $(document).ready(function() {
 
             });
         });
+</script>
 
-
-    </script>
-    <script type="text/javascript">
+<!--Giỏ hàng-->
+<script type="text/javascript">
         $(document).ready(function(){
             $('.add-to-cart').click(function(){
 
@@ -581,7 +681,7 @@ $(document).ready(function() {
 
             });
         });
-    </script>
+</script>
     <script type="text/javascript">
         $(document).ready(function(){
             $('.choose').on('change',function(){
