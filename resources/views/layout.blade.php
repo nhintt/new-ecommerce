@@ -30,7 +30,7 @@
     <link href="{{asset('public/frontend/css/lightgallery.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/lightslider.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/prettify.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
     <!--[if lt IE 9]>
@@ -411,15 +411,42 @@
     <script src="{{asset('public/frontend/js/lightgallery-all.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/lightslider.js')}}"></script>
     <script src="{{asset('public/frontend/js/prettify.js')}}"></script>
-
-
     <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
+    <script src="{{asset('public/frontend/js/simple.money.format.js')}}"></script>
+
    {{--  <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
     <script>paypal.Buttons().render('body');</script> --}}
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
 
+<!--Lọc giá sản phẩm-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $( "#slider-range" ).slider({
+            orientation: "horizontal",
+            range: true,
+            min: {{$min_price}},
+            max: {{$max_price}},
+            values: [ {{$min_price}}, {{$max_price}} ],
+            step: 10000,
+
+            slide: function( event, ui ){
+                $( "#amount_start" ).val(ui.values[ 0 ] + "đ").simpleMoneyFormat();
+                $( "#amount_end" ).val(ui.values[ 1 ] + "đ").simpleMoneyFormat();
+
+                $( "#start_price" ).val( ui.values[ 0 ]);
+                $( "#end_price" ).val( ui.values[ 1 ]);
+            }
+        });
+            $( "#amount_start" ).val($("#slider-range").slider( "values", 0)+ "đ").simpleMoneyFormat();
+            $( "#amount_end" ).val($("#slider-range").slider( "values", 1)+ "đ").simpleMoneyFormat();
+    });
+</script>
+
+<!--Lọc category theo giá và ký tự-->
 <script type="text/javascript">
     $(document).ready(function(){
         $('#sort').on('change', function(){
@@ -432,6 +459,7 @@
     });
 </script>
 
+<!--Wishlist-->
 <script type="text/javascript">
     function view(){
         if(localStorage.getItem('data')!= null){
@@ -486,6 +514,7 @@
     }
 </script>
 
+<!--Autocomplete tìm kiếm-->
 <script type="text/javascript">
     $('#keywords').keyup(function(){
         var query = $(this).val();
@@ -512,7 +541,7 @@
     });
 </script>
 
-
+<!--Thư viện ảnh-->
 <script type="text/javascript">
 $(document).ready(function() {
     $('#imageGallery').lightSlider({
@@ -532,8 +561,8 @@ $(document).ready(function() {
   });
 </script>
 
-    <script type="text/javascript">
-
+<!--Order-->
+<script type="text/javascript">
           $(document).ready(function(){
             $('.send_order').click(function(){
                 swal({
@@ -583,10 +612,10 @@ $(document).ready(function() {
 
             });
         });
+</script>
 
-
-    </script>
-    <script type="text/javascript">
+<!--Giỏ hàng-->
+<script type="text/javascript">
         $(document).ready(function(){
             $('.add-to-cart').click(function(){
 
@@ -630,7 +659,7 @@ $(document).ready(function() {
 
             });
         });
-    </script>
+</script>
     <script type="text/javascript">
         $(document).ready(function(){
             $('.choose').on('change',function(){

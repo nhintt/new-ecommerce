@@ -102,6 +102,9 @@ class CategoryProduct extends Controller
 
         $category_by_slug = CategoryProductModel::where('slug_category_product', $slug_category_product)->get();
 
+        $min_price = Product::min('product_price');
+        $max_price = Product::max('product_price');
+
         foreach($category_by_slug as $key => $cate){
             $category_id = $cate->category_id;
         }
@@ -119,8 +122,14 @@ class CategoryProduct extends Controller
                 $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_name', 'ASC')->paginate(6)->appends(request()->query());
             }
         }
+        else if(isset($_GET['start_price']) && $_GET['end_price']){
+            $min_price = $_GET['start_price'];
+            $max_price = $_GET['end_price'];
+
+            $category_by_id = Product::with('category')->whereBetween('product_price', [$min_price,$max_price])->orderBy('product_id' , 'DESC')->paginate(6);
+        }
         else{
-            $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_id','DESC')->paginate(6);
+            $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_id','DESC')->paginate(6)->appends(request()->query());
         }
 
         $category_name = DB::table('tbl_category_product')->where('tbl_category_product.slug_category_product',$slug_category_product)->limit(1)->get();
@@ -132,7 +141,10 @@ class CategoryProduct extends Controller
                 $url_canonical = $request->url();
                 //--seo
                 }
-        return view('pages.category.show_category')->with('category',$cate_product)->with('brand',$brand_product)->with('category_by_id',$category_by_id)->with('category_name',$category_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('video',$video);
+        return view('pages.category.show_category')->with('category',$cate_product)
+        ->with('brand',$brand_product)->with('category_by_id',$category_by_id)->with('category_name',$category_name)
+        ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)
+        ->with('slider',$slider)->with('video',$video)->with('min_price',$min_price)->with('max_price',$max_price);
     }
     public function export_csv(){
         return Excel::download(new ExcelExports , 'category_product.xlsx');

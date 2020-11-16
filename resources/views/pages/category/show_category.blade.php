@@ -24,6 +24,33 @@
                                 </form>
                             </div>
 
+                            <div class="col-md-4">
+                                <label for="amount">Lọc giá</label>
+                                <form>
+                                    <div id="slider-range"></div>
+                                    <style type="text/css">
+                                        .style-range span {
+                                            float:left;
+                                            width:32%;
+                                        }
+                                    </style>
+                                    <div class="style-range">
+                                        <span><input type="text" id="amount_start" readonly style="border:0; color:#f6931f; font-weight:bold"></span>
+                                        <span style="width:auto">- &nbsp;</span>
+                                        <span><input type="text" id="amount_end" readonly style="border:0; color:#f6931f; font-weight:bold"></span>
+                                    </div>
+
+                                    <input type="hidden" id="start_price" name="start_price">
+                                    <input type="hidden" id="end_price" name="end_price">
+
+                                    <br>
+
+                                </form>
+                            </div>
+                            <div class="col-md-4" style="margin-top: 20px">
+                            <input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default">
+                            </div>
+
                         </div>
 
                         @foreach($category_by_id as $key => $product)
