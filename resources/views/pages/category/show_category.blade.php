@@ -4,7 +4,7 @@
                        <div class="fb-share-button" data-href="http://localhost/tutorial_youtube/shopbanhanglaravel" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
                        <div class="fb-like" data-href="{{$url_canonical}}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="false"></div>
                         @foreach($category_name as $key => $name)
-                       
+
                         <h2 class="title text-center">{{$name->category_name}}</h2>
 
                         @endforeach
@@ -12,7 +12,7 @@
                         <a href="{{URL::to('/chi-tiet/'.$product->product_slug)}}">
                         <div class="col-sm-4">
                              <div class="product-image-wrapper">
-                           
+
                                 <div class="single-products">
                                         <div class="productinfo text-center">
                                             <form>
@@ -29,15 +29,29 @@
                                                 <h2>{{number_format($product->product_price,0,',','.').' '.'VNĐ'}}</h2>
                                                 <p>{{$product->product_name}}</p>
 
-                                             
+
                                              </a>
-                                            <input type="button" value="Thêm giỏ hàng" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">
+                                             <style type="text/css">
+                                                    .xemnhanh {
+                                                    background:#F5F5ED;
+                                                    border: 0 none;
+                                                    border-radius: 0;
+                                                    color: #696763;
+                                                    font-family: 'Roboto', sans-serif;
+                                                    font-size: 15px;
+                                                    margin-bottom: 25px;
+                                                    }
+                                                </style>
+
+                                                    <input type="button" value="Thêm giỏ hàng" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">
+                                                    <input type="button" data-toggle="modal" data-target="#xemnhanh" value="Xem nhanh" class="btn btn-default xemnhanh" data-id_product="{{$product->product_id}}" name="add-to-cart">
+
                                             </form>
 
                                         </div>
-                                      
+
                                 </div>
-                           
+
                                 <div class="choose">
                                     <ul class="nav nav-pills nav-justified">
                                         <li><a href="#"><i class="fa fa-plus-square"></i>Yêu thích</a></li>
@@ -49,6 +63,82 @@
                         </a>
                         @endforeach
                     </div><!--features_items-->
+<!-- Modal xem nhanh -->
+<div class="modal fade" id="xemnhanh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title product_quickview_title" id="">
+                    <span id="product_quickview_title"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <span id="product_quickview_image"></span>
+                        <span id="product_quickview_gallery"></span>
+                    </div>
+                    <div class="col-md-7">
+                            <style type="text/css">
+                                h5.modal-title.product_quickview_title {
+                                    text-align: center;
+                                    font-size: 25px;
+                                    color: brown;
+                                }
+                                p.quickview {
+                                    font-size: 14px;
+                                    color: brown;
+                                }
+                                span#product_quickview_content img {
+                                    width: 100%;
+                                }
+                                <style>
+                                    @media screen and (min-width: 768px) {
+                                        .modal-diablog {
+                                            width: 700px;
+                                        }
+                                        .modal-sm {
+                                            width: 350px;
+                                        }
+                                        @media screen and (min-width: 992px) {
+                                            .modal-lg {
+                                                width: 1200px;
+                                            }
+                                        }
+                                    }
+                                </style>
+                            </style>
+
+                            <h2 class="quickview"><span id="product_quickview_title"></span></h2>
+                            <p>Mã ID: <span id="product_quickview_id"></span></p>
+
+                            <span>
+                                <h2 style="color: #FE980F">Giá sản phẩm: <span id="product_quickview_price"></span></h2><br/>
+                                <label>Số lượng: </label>
+                                <input type="number" name="qty" min="1" class="cart_product_qty_" value="1" />
+                                <input name="product_hidden" type="hidden" value="" />
+                            </span><br/>
+                            <p class="quickview">Mô tả sản phẩm</p>
+                            <fieldset>
+                                <span style="width:100%" id="product_quickview_desc"></span>
+                                <span style="width:100%" id="product_quickview_content"></span>
+                            </fieldset>
+                            <input type="button" value="Mua ngay" class="btn btn-primary btn-sm add-to-cart" data-id_product="" name="add-to-cart">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-default">Đi tới giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal xem nhanh -->
                    <ul class="pagination pagination-sm m-t-none m-b-none">
                        {!!$category_by_id->links()!!}
                     </ul>

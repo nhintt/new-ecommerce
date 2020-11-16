@@ -21,6 +21,7 @@ Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
 Route::get('/danh-muc/{slug_category_product}','CategoryProduct@show_category_home');
 Route::get('/thuong-hieu/{brand_slug}','BrandProduct@show_brand_home');
 Route::get('/chi-tiet/{product_slug}','ProductController@details_product');
+Route::post('/quickview','ProductController@quickview');
 
 //Backend
 Route::get('/admin','AdminController@index');
