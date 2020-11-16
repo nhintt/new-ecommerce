@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Slider;
 use App\Video;
+use App\Gallery;
 use App\Exports\ExcelExports;
 use App\Imports\ExcelImports;
 use Excel;
@@ -95,7 +96,6 @@ class CategoryProduct extends Controller
     public function show_category_home(Request $request ,$slug_category_product){
        //slide
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $video = Video::orderBy('video_id','desc')->take(4)->get();
