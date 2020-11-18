@@ -87,24 +87,35 @@
                     @foreach ($post_views as $key => $post)
                         <li>
                             <a href="{{ url('bai-viet/' . $post->post_slug) }}">{{ $post->post_title }} | <span
-                                style="color: #000">{{$post->post_views}}</span></a>
+                                    style="color: #000">{{ $post->post_views }}</span></a>
                         </li>
                     @endforeach
                 </ol>
             </div> --}}
 
-            {{-- <div class="col-md-4 col-xs-12">
+            <div class="col-md-4 col-xs-12">
                 <style type="text/css">
                     ol.list_views {
                         margin: 10px 0;
                         color: #fff
                     }
+
                     ol.list_views a {
                         color: orange;
                         font-weight: 400
                     }
+
                 </style>
-            </div> --}}
+                <h3>Sản phẩm xem nhiều</h3>
+                <ol class="list_views">
+                    @foreach ($product_views as $key => $pro)
+                        <li>
+                            <a href="{{ url('/chi-tiet/'.$pro->product_slug) }}">{{ $pro->product_name }} | <span
+                            style="color: black">{{ $pro->product_views }}</span></a>
+                        </li>
+                    @endforeach
+                </ol>
+            </div>
         </div>
     </div>
 @endsection

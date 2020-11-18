@@ -17,6 +17,7 @@ use App\Statistic;
 use App\Visitors;
 use App\Order;
 use App\Product;
+use App\Video;
 use Carbon\Carbon;
 use Doctrine\DBAL\Schema\Visitor\Visitor;
 use ReCaptcha\RequestMethod\Post;
@@ -171,16 +172,16 @@ class AdminController extends Controller
         $visitors = Visitors::all();
         $visitors_total = $visitors->count();
         //total
-        // $product = Product::all()->count();
-        // $product_views = Product::orderBy('product_views', 'DESC')->take(20)->get();
+        $product = Product::all()->count();
+        $product_views = Product::orderBy('product_views', 'DESC')->take(20)->get();
         // $post = Post::all()->count();
         // $post_views = Post::orderBy('post_views', 'DESC')->take(20)->get();
-        // $order = Order::all()->count();
-        // $video = Video::all()->count();
-        // $customer = Customer::all()->count();
+        $order = Order::all()->count();
+        $video = Video::all()->count();
+        $customer = Customer::all()->count();
 
 
-        return view('admin.dashboard')->with(compact('visitor_count', 'visitors_total', 'visitor_last_month_count', 'visitor_this_month_count', 'visitor_year_count'));
+        return view('admin.dashboard')->with(compact('visitor_count', 'visitors_total', 'visitor_last_month_count', 'visitor_this_month_count', 'visitor_year_count', 'product', 'order', 'video', 'customer', 'product_views'));
     }
     public function days_order()
     {

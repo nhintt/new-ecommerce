@@ -321,7 +321,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 //backgroundColor: '#333333', // border color
                 data: [{
                         label: "San pham",
-                        value: <?php echo $product ?>,
+                        value: <?php echo $product ?>
                     },
                     {
                         label: "Don hang",
@@ -334,8 +334,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     {
                         label: "Khach hang",
                         value: <?php echo $customer ?>
-                    }
-                ]
+                    }]
             });
 
         });
