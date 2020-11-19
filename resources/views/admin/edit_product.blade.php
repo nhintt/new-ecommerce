@@ -24,13 +24,14 @@
                                     <input type="text" name="product_name" class="form-control" onkeyup="ChangeToSlug();" id="slug" value="{{$pro->product_name}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">SL sản phẩm</label>
-                                    <input type="text" data-validation="number" data-validation-error-msg="Làm ơn điền số lượng" name="product_quantity" class="form-control" id="convert_slug" value="{{$pro->product_quantity}}">
-                                </div>
-                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Slug</label>
-                                    <input type="text" name="product_slug" class="form-control" id="exampleInputEmail1" value="{{$pro->product_slug}}">
+                                    <input type="text" name="product_slug" class="form-control" id="convert_slug" value="{{$pro->product_slug}}">
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">SL sản phẩm</label>
+                                    <input type="text" data-validation="number" data-validation-error-msg="Làm ơn điền số lượng" name="product_quantity" class="form-control"  value="{{$pro->product_quantity}}">
+                                </div>
+
                                      <div class="form-group">
                                     <label for="exampleInputEmail1">Giá sản phẩm</label>
                                     <input type="text" value="{{$pro->product_price}}" name="product_price" class="form-control" id="exampleInputEmail1" >
@@ -58,7 +59,7 @@
                                             <option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
                                             @endif
                                         @endforeach
-                                            
+
                                     </select>
                                 </div>
                                  <div class="form-group">
@@ -71,7 +72,7 @@
                                             <option value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>
                                              @endif
                                         @endforeach
-                                            
+
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -79,10 +80,10 @@
                                       <select name="product_status" class="form-control input-sm m-bot15">
                                             <option value="0">Ẩn</option>
                                             <option value="1">Hiển thị</option>
-                                            
+
                                     </select>
                                 </div>
-                               
+
                                 <button type="submit" name="add_product" class="btn btn-info">Cập nhật sản phẩm</button>
                                 </form>
                                 @endforeach

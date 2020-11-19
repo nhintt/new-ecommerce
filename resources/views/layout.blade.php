@@ -37,7 +37,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="{{('public/frontend/images/favicon.ico')}}">
+    <!-- <link rel="shortcut icon" href="{{('public/frontend/images/favicon.ico')}}"> -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
@@ -78,7 +78,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html"><img src="{{('public/frontend/images/home/logo.png')}}" alt="" /></a>
+                            <a href="index.html"><img src="{{('public/frontend/images/logo.png')}}" alt="" /></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -297,8 +297,7 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="companyinfo">
-                            <h2><span>e</span>-shopper</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+                            <!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" preloader-text="Loading..." data-fw-param="139193/"></script> <!-- end feedwind code -->
                         </div>
                     </div>
                     <div class="col-sm-10">
@@ -306,7 +305,7 @@
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                             <a href="#">
-                            <iframe width="200" height="200" src="https://www.youtube.com/embed/{{$vid->video_link}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="200" height="200" src="https://www.youtube.com/embed/{{$vid->video_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <h2>{{$vid->video_title}}</h2>
                                 <p>{{$vid->video_desc}}</p>
                             </a>
@@ -323,7 +322,7 @@
         <div class="footer-widget">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-2">
+                    <!-- <div class="col-sm-2">
                         <div class="single-widget">
                             <h2>Service</h2>
                             <ul class="nav nav-pills nav-stacked">
@@ -334,8 +333,8 @@
                                 <li><a href="#">FAQ’s</a></li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-sm-2">
+                    </div> -->
+                    <!-- <div class="col-sm-2">
                         <div class="single-widget">
                             <h2>Quock Shop</h2>
                             <ul class="nav nav-pills nav-stacked">
@@ -346,8 +345,8 @@
                                 <li><a href="#">Shoes</a></li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-sm-2">
+                    </div> -->
+                    <!-- <div class="col-sm-2">
                         <div class="single-widget">
                             <h2>Policies</h2>
                             <ul class="nav nav-pills nav-stacked">
@@ -358,8 +357,8 @@
                                 <li><a href="#">Ticket System</a></li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-sm-2">
+                    </div> -->
+                    <!-- <div class="col-sm-2">
                         <div class="single-widget">
                             <h2>About Shopper</h2>
                             <ul class="nav nav-pills nav-stacked">
@@ -370,7 +369,7 @@
                                 <li><a href="#">Copyright</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-sm-3 col-sm-offset-1">
                         <div class="single-widget">
                             <h2>About Shopper</h2>
@@ -423,7 +422,7 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
 
 <!--Lọc giá sản phẩm-->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function(){
         $( "#slider-range" ).slider({
             orientation: "horizontal",
@@ -444,7 +443,7 @@
             $( "#amount_start" ).val($("#slider-range").slider( "values", 0)+ "đ").simpleMoneyFormat();
             $( "#amount_end" ).val($("#slider-range").slider( "values", 1)+ "đ").simpleMoneyFormat();
     });
-</script>
+</script> -->
 
 <!--Lọc category theo giá và ký tự-->
 <script type="text/javascript">
@@ -507,7 +506,7 @@
             alert('Sản phẩm đã có trong danh sách yêu thích');
         }else{
             old_data.push(newItem);
-            $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+newItem.image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+newItem.name+'</p><p style="color: #FE980F">'+newItem.price+'</p><a href="'+newItem.url+'">Đặt hàng</a></div></div>')
+            $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+newItem.image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+newItem.name+'</p><p style="color: #FE980F">'+newItem.price+'</p><a href="'+newItem.url+'">Xem chi tiết</a></div></div>')
         }
 
         localStorage.setItem('data', JSON.stringify(old_data));
@@ -681,7 +680,8 @@ $(document).ready(function() {
 
             });
         });
-</script>
+    </script>
+
     <script type="text/javascript">
         $(document).ready(function(){
             $('.choose').on('change',function(){

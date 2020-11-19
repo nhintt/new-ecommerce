@@ -8,7 +8,6 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
   position: relative;
   font-weight:400px;
 }
@@ -265,7 +264,7 @@ a#scrollUp i{
   outline: medium none;
   padding-left: 10px;
   width: 155px;
-  background-image: url(../images/home/searchicon.png);
+  background-image: url(../images/searchicon.png);
   background-repeat: no-repeat;
   background-position: 130px;
 }
@@ -903,7 +902,6 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
 }
 
 .single-products:hover .product-overlay {
@@ -2526,5 +2524,10 @@ h2.title {
 
 .col-md-8 .info_wishlist p {
     margin:0;
+}
+
+.price-sort {
+    width: 30% !important;
+    margin-bottom: 5%;
 }
 
