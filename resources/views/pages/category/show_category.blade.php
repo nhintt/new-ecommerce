@@ -10,11 +10,11 @@
                         @endforeach
 
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <label for="amount">Sắp xếp theo</label>
                                 <form>
                                     @csrf
-                                    <select name="sort" id="sort" class="form-control">
+                                    <select name="sort" id="sort" class="form-control price-sort">
                                         <option value="{{Request::url()}}?sort_by=none">--Lọc--</option>
                                         <option value="{{Request::url()}}?sort_by=tang_dan">Giá tăng dần</option>
                                         <option value="{{Request::url()}}?sort_by=giam_dan">Giá giảm dần</option>
@@ -23,35 +23,6 @@
                                     </select>
                                 </form>
                             </div>
-
-                            <div class="col-md-4">
-                                <label for="amount">Lọc giá</label>
-                                <form>
-                                    <div id="slider-range"></div>
-                                    <style type="text/css">
-                                        .style-range span {
-                                            float:left;
-                                            width:32%;
-                                        }
-                                    </style>
-                                    <div class="style-range">
-                                        <span><input type="text" id="amount_start" readonly style="border:0; color:#f6931f; font-weight:bold"></span>
-                                        <span style="width:auto">- &nbsp;</span>
-                                        <span><input type="text" id="amount_end" readonly style="border:0; color:#f6931f; font-weight:bold"></span>
-                                    </div>
-
-                                    <input type="hidden" id="start_price" name="start_price">
-                                    <input type="hidden" id="end_price" name="end_price">
-
-                                    <br>
-
-                                </form>
-                            </div>
-                            <div class="col-md-4" style="margin-top: 20px">
-                            <input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default">
-                            </div>
-
-                        </div>
 
                         @foreach($category_by_id as $key => $product)
                         <a href="{{URL::to('/chi-tiet/'.$product->product_slug)}}">
@@ -134,7 +105,7 @@
                     </div><!--features_items-->
 <!-- Modal xem nhanh -->
 <div class="modal fade" id="xemnhanh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title product_quickview_title" id="">
@@ -152,57 +123,47 @@
                     </div>
                     <div class="col-md-7">
                             <style type="text/css">
-                                h5.modal-title.product_quickview_title {
-                                    text-align: center;
-                                    font-size: 25px;
-                                    color: brown;
-                                }
-                                p.quickview {
-                                    font-size: 14px;
-                                    color: brown;
-                                }
                                 span#product_quickview_content img {
                                     width: 100%;
                                 }
-                                <style>
-                                    @media screen and (min-width: 768px) {
-                                        .modal-diablog {
+                                @media screen and (min-width: 768px) {
+                                        .modal-dialog {
                                             width: 700px;
                                         }
                                         .modal-sm {
                                             width: 350px;
                                         }
+                                    }
                                         @media screen and (min-width: 992px) {
                                             .modal-lg {
                                                 width: 1200px;
                                             }
                                         }
-                                    }
-                                </style>
+
                             </style>
 
-                            <h2 class="quickview"><span id="product_quickview_title"></span></h2>
+                            <h2><span id="product_quickview_title"></span></h2>
                             <p>Mã ID: <span id="product_quickview_id"></span></p>
 
-                            <span>
-                                <h2 style="color: #FE980F">Giá sản phẩm: <span id="product_quickview_price"></span></h2><br/>
-                                <label>Số lượng: </label>
-                                <input type="number" name="qty" min="1" class="cart_product_qty_" value="1" />
-                                <input name="product_hidden" type="hidden" value="" />
-                            </span><br/>
-                            <p class="quickview">Mô tả sản phẩm</p>
-                            <fieldset>
-                                <span style="width:100%" id="product_quickview_desc"></span>
-                                <span style="width:100%" id="product_quickview_content"></span>
-                            </fieldset>
-                            <input type="button" value="Mua ngay" class="btn btn-primary btn-sm add-to-cart" data-id_product="" name="add-to-cart">
+
+                                <p style="color: #FE980F ; font-size: 20px; font-weight: bold">Giá sản phẩm: <span id="product_quickview_price"></span></p><br/>
+                                <!--<label>Số lượng: </label>-->
+                                <!--<input type="number" name="qty" min="1" class="cart_product_qty_" value="1" />-->
+                                <!--<input name="product_hidden" type="hidden" value="" />-->
+
+                            <h5 style="color: #FE980F; font-size: 20px; font-weight: bold">Mô tả sản phẩm</h5>
+                            <hr>
+                                <p><span id="product_quickview_desc"></span></p>
+                                <p><span id="product_quickview_content"></span><p>
+
+                            <!-- <input type="button" value="Mua ngay" class="btn btn-primary btn-sm add-to-cart" name="add-to-cart"> -->
 
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-default">Đi tới giỏ hàng</button>
+                <!-- <button type="button" class="btn btn-default">Đi tới giỏ hàng</button> -->
             </div>
         </div>
     </div>

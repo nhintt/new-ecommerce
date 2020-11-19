@@ -7,6 +7,7 @@ use DB;
 use App\Brand;
 use App\Slider;
 use App\Video;
+use App\Product;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -114,7 +115,29 @@ class BrandProduct extends Controller
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $video = Video::orderby('video_id','desc')->take(4)->get();
 
-        $brand_by_id = DB::table('tbl_product')->join('tbl_brand','tbl_product.brand_id','=','tbl_brand.brand_id')->where('tbl_brand.brand_slug',$brand_slug)->paginate(6);
+        $brand_by_slug = Brand::where('brand_slug', $brand_slug)->get();
+
+        foreach($brand_by_slug as $key => $brand){
+            $brand_id = $brand->brand_id;
+        }
+
+        if(isset($_GET['sort_by'])){
+            $sort_by = $_GET['sort_by'];
+
+            if($sort_by == 'giam_dan'){
+                $brand_by_id = Product::with('brand')->where('brand_id', $brand_id)->orderBy('product_price', 'DESC')->paginate(6)->appends(request()->query());
+            }else if($sort_by == 'tang_dan'){
+                $brand_by_id = Product::with('brand')->where('brand_id', $brand_id)->orderBy('product_price', 'ASC')->paginate(6)->appends(request()->query());
+            }else if($sort_by == 'kytu_za'){
+                $brand_by_id = Product::with('brand')->where('brand_id', $brand_id)->orderBy('product_name', 'DESC')->paginate(6)->appends(request()->query());
+            }else if($sort_by == 'kytu_az'){
+                $brand_by_id = Product::with('brand')->where('brand_id', $brand_id)->orderBy('product_name', 'ASC')->paginate(6)->appends(request()->query());
+            }
+        }
+        else{
+
+            $brand_by_id = Product::with('brand')->where('brand_id', $brand_id)->orderBy('product_id','DESC')->paginate(6)->appends(request()->query());
+        }
 
         $brand_name = DB::table('tbl_brand')->where('tbl_brand.brand_slug',$brand_slug)->limit(1)->get();
 
@@ -126,7 +149,6 @@ class BrandProduct extends Controller
             $url_canonical = $request->url();
             //--seo
         }
-
         return view('pages.brand.show_brand')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id)->with('brand_name',$brand_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('video',$video);
     }
 }
