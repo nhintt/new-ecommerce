@@ -213,7 +213,7 @@
                         @php
                             $i = 0;
                         @endphp
-                        @foreach($getslider as $key => $slide)
+                        @foreach($slider as $key => $slide)
                             @php
                                 $i++;
                             @endphp
@@ -301,7 +301,7 @@
                         </div>
                     </div>
                     <div class="col-sm-10">
-                    @foreach ($getvideo as $key => $vid)
+                    @foreach ($video as $key => $vid)
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                             <a href="#">

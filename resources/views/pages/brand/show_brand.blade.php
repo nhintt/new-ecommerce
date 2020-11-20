@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<div class="features_items"><!--features_items-->
+<div class="features_items">
 
                         @foreach($brand_name as $key => $name)
 
@@ -163,10 +163,9 @@
         </div>
     </div>
 </div>
-<!-- End Modal xem nhanh -->
+
                       <ul class="pagination pagination-sm m-t-none m-b-none">
                        {!!$brand_by_id->links()!!}
                       </ul>
 
-        <!--/recommended_items-->
 @endsection
