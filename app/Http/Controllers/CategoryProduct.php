@@ -98,7 +98,7 @@ class CategoryProduct extends Controller
         $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        $getvideo = Video::orderBy('video_id','desc')->take(4)->get();
+        $getvideo = Video::orderBy('video_id','desc')->take(3)->get();
 
         $category_by_slug = CategoryProductModel::where('slug_category_product', $slug_category_product)->get();
 

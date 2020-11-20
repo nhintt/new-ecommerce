@@ -184,7 +184,7 @@ class ProductController extends Controller
     public function details_product($product_slug , Request $request){
          //slide
         $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-        $getvideo = Video::orderBy('video_id','desc')->take(4)->get();
+        $getvideo = Video::orderBy('video_id','desc')->take(3)->get();
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();

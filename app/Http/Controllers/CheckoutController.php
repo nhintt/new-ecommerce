@@ -146,7 +146,7 @@ class CheckoutController extends Controller
     {
         //slide
         $getslider = Slider::orderBy('slider_id', 'DESC')->where('slider_status', '1')->take(4)->get();
-        $getvideo = Video::orderBy('video_id', 'desc')->take(4)->get();
+        $getvideo = Video::orderBy('video_id', 'desc')->take(3)->get();
         //seo
         $meta_desc = "Đăng nhập thanh toán";
         $meta_keywords = "Đăng nhập thanh toán";
@@ -179,7 +179,7 @@ class CheckoutController extends Controller
         //seo
         //slide
         $getslider = Slider::orderBy('slider_id', 'DESC')->where('slider_status', '1')->take(4)->get();
-        $getvideo = Video::orderBy('video_id', 'desc')->take(4)->get();
+        $getvideo = Video::orderBy('video_id', 'desc')->take(3)->get();
         $meta_desc = "Đăng nhập thanh toán";
         $meta_keywords = "Đăng nhập thanh toán";
         $meta_title = "Đăng nhập thanh toán";
