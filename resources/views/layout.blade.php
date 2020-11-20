@@ -295,14 +295,14 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <div class="companyinfo">
                             <!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" preloader-text="Loading..." data-fw-param="139193/"></script> <!-- end feedwind code -->
                         </div>
                     </div>
-                    <div class="col-sm-10">
-                    @foreach ($getvideo as $key => $vid)
-                        <div class="col-sm-3">
+                    <div class="col-sm-8">
+                        @foreach ($getvideo as $key => $vid)
+                        <div class="col-sm-4">
                             <div class="video-gallery text-center">
                             <a href="#">
                             <iframe width="200" height="200" src="https://www.youtube.com/embed/{{$vid->video_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -312,7 +312,6 @@
                             </div>
                         </div>
                     @endforeach
-
                     </div>
 
                 </div>
