@@ -2531,3 +2531,79 @@ h2.title {
     margin-bottom: 5%;
 }
 
+/* -------Toggle-------------------------- */
+.sidebar-contact {
+    position: fixed;
+    right: -350px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 350px;
+    height: auto;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, .5);
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.sidebar-contact.active {
+    right: 0;
+}
+
+.sidebar-contact input,
+.sidebar-contact textarea {
+    /* width: 100%; */
+    height: 36px;
+    padding: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, .5);
+    outline: none;
+}
+
+.sidebar-contact textarea {
+    height: 60px;
+    resize: none;
+}
+
+.sidebar-contact input[type="submit"] {
+    background: #6699cc;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    font-style: 18px;
+}
+
+.sidebar-contact h2 {
+    margin: 0 0 20px;
+    padding: 0;
+    color: #6699cc;
+}
+
+.toggle {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    top: 0;
+    left: -48px;
+    text-align: center;
+    cursor: pointer;
+    background: #6699cc;
+}
+
+.toggle:before {
+    content: '\f003';
+    font-family: fontAwesome;
+    color: #fff;
+    font-size: 18px;
+}
+
+.toggle.active:before {
+    content: '\f00d';
+}
+
+.site-section h4 {
+    color: #6699cc;
+    font-weight: bold;
+}
