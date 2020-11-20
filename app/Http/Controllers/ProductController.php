@@ -160,8 +160,8 @@ class ProductController extends Controller
     //End Admin Page
     public function details_product($product_slug , Request $request){
          //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-        $video = Video::orderBy('video_id','desc')->take(4)->get();
+        $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        $getvideo = Video::orderBy('video_id','desc')->take(4)->get();
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
@@ -190,7 +190,7 @@ class ProductController extends Controller
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_slug',[$product_slug])->orderby(DB::raw('RAND()'))->paginate(3);
 
-        return view('pages.sanpham.show_details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('gallery', $gallery)->with('video',$video);
+        return view('pages.sanpham.show_details')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('gallery', $gallery)->with('getvideo',$getvideo);
 
     }
 }
