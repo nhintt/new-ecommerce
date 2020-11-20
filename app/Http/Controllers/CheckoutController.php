@@ -145,8 +145,8 @@ class CheckoutController extends Controller
     public function login_checkout(Request $request)
     {
         //slide
-        $slider = Slider::orderBy('slider_id', 'DESC')->where('slider_status', '1')->take(4)->get();
-        $video = Video::orderBy('video_id', 'desc')->take(4)->get();
+        $getslider = Slider::orderBy('slider_id', 'DESC')->where('slider_status', '1')->take(4)->get();
+        $getvideo = Video::orderBy('video_id', 'desc')->take(4)->get();
         //seo
         $meta_desc = "Đăng nhập thanh toán";
         $meta_keywords = "Đăng nhập thanh toán";
@@ -157,7 +157,7 @@ class CheckoutController extends Controller
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderby('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderby('brand_id', 'desc')->get();
 
-        return view('pages.checkout.login_checkout')->with('category', $cate_product)->with('brand', $brand_product)->with('meta_desc', $meta_desc)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('url_canonical', $url_canonical)->with('slider', $slider)->with('video', $video);
+        return view('pages.checkout.login_checkout')->with('cate_product', $cate_product)->with('brand_product', $brand_product)->with('meta_desc', $meta_desc)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('url_canonical', $url_canonical)->with('getslider', $getslider)->with('getvideo', $getvideo);
     }
     public function add_customer(Request $request)
     {
@@ -178,8 +178,8 @@ class CheckoutController extends Controller
     {
         //seo
         //slide
-        $slider = Slider::orderBy('slider_id', 'DESC')->where('slider_status', '1')->take(4)->get();
-        $video = Video::orderBy('video_id', 'desc')->take(4)->get();
+        $getslider = Slider::orderBy('slider_id', 'DESC')->where('slider_status', '1')->take(4)->get();
+        $getvideo = Video::orderBy('video_id', 'desc')->take(4)->get();
         $meta_desc = "Đăng nhập thanh toán";
         $meta_keywords = "Đăng nhập thanh toán";
         $meta_title = "Đăng nhập thanh toán";
@@ -190,7 +190,7 @@ class CheckoutController extends Controller
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderby('brand_id', 'desc')->get();
         $city = City::orderby('matp', 'ASC')->get();
 
-        return view('pages.checkout.show_checkout')->with('category', $cate_product)->with('brand', $brand_product)->with('meta_desc', $meta_desc)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('url_canonical', $url_canonical)->with('city', $city)->with('slider', $slider)->with('video', $video);
+        return view('pages.checkout.show_checkout')->with('cate_product', $cate_product)->with('brand_product', $brand_product)->with('meta_desc', $meta_desc)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('url_canonical', $url_canonical)->with('city', $city)->with('getslider', $getslider)->with('getvideo', $getvideo);
     }
     public function save_checkout_customer(Request $request)
     {

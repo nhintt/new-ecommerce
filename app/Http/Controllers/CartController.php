@@ -52,8 +52,8 @@ class CartController extends Controller
     public function gio_hang(Request $request){
          //seo
          //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-        $video = Video::orderBy('video_id','desc')->take(4)->get();
+        $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        $getvideo = Video::orderBy('video_id','desc')->take(4)->get();
         $meta_desc = "Giỏ hàng của bạn";
         $meta_keywords = "Giỏ hàng Ajax";
         $meta_title = "Giỏ hàng Ajax";
@@ -62,7 +62,7 @@ class CartController extends Controller
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
 
-        return view('pages.cart.cart_ajax')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('video',$video);
+        return view('pages.cart.cart_ajax')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('getvideo',$getvideo);
     }
     public function add_cart_ajax(Request $request){
         // Session::forget('cart');
