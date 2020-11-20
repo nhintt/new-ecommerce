@@ -113,7 +113,7 @@ class BrandProduct extends Controller
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        $getvideo = Video::orderby('video_id','desc')->take(4)->get();
+        $getvideo = Video::orderby('video_id','desc')->take(3)->get();
 
         $brand_by_slug = Brand::where('brand_slug', $brand_slug)->get();
 

@@ -53,7 +53,7 @@ class CartController extends Controller
          //seo
          //slide
         $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-        $getvideo = Video::orderBy('video_id','desc')->take(4)->get();
+        $getvideo = Video::orderBy('video_id','desc')->take(3)->get();
         $meta_desc = "Giỏ hàng của bạn";
         $meta_keywords = "Giỏ hàng Ajax";
         $meta_title = "Giỏ hàng Ajax";

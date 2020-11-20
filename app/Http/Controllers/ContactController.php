@@ -17,7 +17,7 @@ class ContactController extends Controller
 {
     public function lien_he(Request $request){
         $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-        $getvideo = Video::orderBy('video_id','desc')->take(4)->get();
+        $getvideo = Video::orderBy('video_id','desc')->take(3)->get();
         //seo
         $meta_desc = "Liên hệ";
         $meta_keywords = "Liên hệ";
