@@ -38,8 +38,8 @@ class HomeController extends Controller
     public function index(Request $request){
 
         //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-        $video = Video::orderby('video_id','desc')->take(4)->get();
+        $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        $getvideo = Video::orderby('video_id','desc')->take(4)->get();
         //seo
         $meta_desc = "Chuyên bán những phụ kiện ,thiết bị game";
         $meta_keywords = "thiet bi game,phu kien game,game phu kien,game giai tri";
@@ -57,13 +57,13 @@ class HomeController extends Controller
 
         $all_product = DB::table('tbl_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(6);
 
-    	return view('pages.home')->with('category',$cate_product)->with('brand',$brand_product)->with('all_product',$all_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('video',$video); //1
+    	return view('pages.home')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('getvideo',$getvideo); //1
         // return view('pages.home')->with(compact('cate_product','brand_product','all_product')); //2
     }
     public function search(Request $request){
         //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
-        $video = Video::orderby('video_id','desc')->take(4)->get();
+        $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        $getvideo = Video::orderby('video_id','desc')->take(4)->get();
         //seo
         $meta_desc = "Tìm kiếm sản phẩm";
         $meta_keywords = "Tìm kiếm sản phẩm";
@@ -78,7 +78,7 @@ class HomeController extends Controller
         $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keywords.'%')->get();
 
 
-        return view('pages.sanpham.search')->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('video',$video);
+        return view('pages.sanpham.search')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('getvideo',$getvideo);
 
     }
     public function autocomplete_ajax(Request $request){

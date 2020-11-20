@@ -109,11 +109,11 @@ class BrandProduct extends Controller
 
      public function show_brand_home(Request $request, $brand_slug){
         //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        $video = Video::orderby('video_id','desc')->take(4)->get();
+        $getvideo = Video::orderby('video_id','desc')->take(4)->get();
 
         $brand_by_slug = Brand::where('brand_slug', $brand_slug)->get();
 
@@ -149,6 +149,6 @@ class BrandProduct extends Controller
             $url_canonical = $request->url();
             //--seo
         }
-        return view('pages.brand.show_brand')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id)->with('brand_name',$brand_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('video',$video);
+        return view('pages.brand.show_brand')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('brand_by_id',$brand_by_id)->with('brand_name',$brand_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('getvideo',$getvideo);
     }
 }

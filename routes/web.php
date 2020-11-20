@@ -29,6 +29,9 @@ Route::get('/admin','AdminController@index');
 Route::get('/dashboard','AdminController@show_dashboard');
 Route::get('/logout','AdminController@logout');
 Route::post('/admin-dashboard','AdminController@dashboard');
+Route::post('/filter-by-date', 'AdminController@filter_by_date');
+Route::post('/days-order', 'AdminController@days_order');
+Route::post('/dashboard-filter', 'AdminController@dashboard_filter');
 
 
 //Category Product

@@ -168,7 +168,7 @@
                                 <li><a href="{{URL::to('/trang-chu')}}" class="active">Trang chủ</a></li>
                                 <li class="dropdown"><a href="#">Sản phẩm<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        @foreach($category as $key => $danhmuc)
+                                        @foreach($cate_product as $key => $danhmuc)
                                         <li><a href="{{URL::to('/danh-muc/'.$danhmuc->slug_category_product)}}">{{$danhmuc->category_name}}</a></li>
                                         @endforeach
                                     </ul>
@@ -213,7 +213,7 @@
                         @php
                             $i = 0;
                         @endphp
-                        @foreach($slider as $key => $slide)
+                        @foreach($getslider as $key => $slide)
                             @php
                                 $i++;
                             @endphp
@@ -249,7 +249,7 @@
                     <div class="left-sidebar">
                         <h2>Danh mục sản phẩm</h2>
                         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                          @foreach($category as $key => $cate)
+                          @foreach($cate_product as $key => $cate)
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -259,11 +259,11 @@
                         @endforeach
                         </div><!--/category-products-->
 
-                        <div class="brands_products"><!--brands_products-->
+                        <div class="brands_products">
                             <h2>Thương hiệu sản phẩm</h2>
                             <div class="brands-name">
                                 <ul class="nav nav-pills nav-stacked">
-                                    @foreach($brand as $key => $brand)
+                                    @foreach($brand_product as $key => $brand)
                                     <li><a href="{{URL::to('/thuong-hieu/'.$brand->brand_slug)}}"> <span class="pull-right"></span>{{$brand->brand_name}}</a></li>
                                     @endforeach
                                 </ul>
@@ -301,7 +301,7 @@
                         </div>
                     </div>
                     <div class="col-sm-10">
-                    @foreach ($video as $key => $vid)
+                    @foreach ($getvideo as $key => $vid)
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                             <a href="#">
