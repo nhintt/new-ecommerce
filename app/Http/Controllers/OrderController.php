@@ -286,13 +286,13 @@ class OrderController extends Controller
     public function view_order($order_code)
     {
         $order_details = OrderDetails::with('product')->where('order_code', $order_code)->get();
-        $order = Order::where('order_code', $order_code)->get();
-        foreach ($order as $key => $ord) {
+        $getorder = Order::where('order_code', $order_code)->get();
+        foreach ($getorder as $key => $ord) {
             $customer_id = $ord->customer_id;
             $shipping_id = $ord->shipping_id;
             $order_status = $ord->order_status;
         }
-        $customer = Customer::where('customer_id', $customer_id)->first();
+        $getcustomer = Customer::where('customer_id', $customer_id)->first();
         $shipping = Shipping::where('shipping_id', $shipping_id)->first();
 
         $order_details_product = OrderDetails::with('product')->where('order_code', $order_code)->get();
@@ -310,11 +310,11 @@ class OrderController extends Controller
             $coupon_number = 0;
         }
 
-        return view('admin.view_order')->with(compact('order_details', 'customer', 'shipping', 'order_details', 'coupon_condition', 'coupon_number', 'order', 'order_status'));
+        return view('admin.view_order')->with(compact('order_details', 'getcustomer', 'shipping', 'coupon_condition', 'coupon_number', 'getorder', 'order_status'));
     }
     public function manage_order()
     {
-        $order = Order::orderby('created_at', 'DESC')->paginate(5);
-        return view('admin.manage_order')->with(compact('order'));
+        $getorder = Order::orderby('created_at', 'DESC')->paginate(5);
+        return view('admin.manage_order')->with(compact('getorder'));
     }
 }
