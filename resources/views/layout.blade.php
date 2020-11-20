@@ -420,6 +420,24 @@
 
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        load_comment();
+        function load_comment(){
+            var product_id = $('.comment_product_id').val();
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+                url: "{{url('/load-comment')}}",
+                method: "POST",
+                data:{product_id:product_id, _token:_token},
+                success: function(data){
+                $('#comment_show').html(data);
+                }
+        });
+        }
+    });
+</script>
 
 <!--Lọc giá sản phẩm-->
 <!-- <script type="text/javascript">

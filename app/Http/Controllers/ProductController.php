@@ -8,6 +8,7 @@ use Session;
 use App\Slider;
 use App\Video;
 use App\Gallery;
+use App\Comment;
 use App\Product;
 use File;
 use App\Http\Requests;
@@ -22,6 +23,28 @@ class ProductController extends Controller
         }else{
             return Redirect::to('admin')->send();
         }
+    }
+    public function load_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment = Comment::where('comment_product_id',$product_id)->get();
+        $output = '';
+        foreach($comment as $key => $comm){
+            $output.= ' <div class="row style_comment">
+
+                                            <div class="col-md-2">
+
+                                                <img width="100%" src="'.url('/public/frontend/images/batman-icon.png').'" class="img img-responsive img-thumbnail">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p style="color:green">@'.$comm->comment_name.'</p>
+                                                <p style="color:black">'.$comm->comment_date.'</p>
+                                                <p>'.$comm->comment.'</p>
+                                            </div>
+                                        </div><p></p>';
+
+        }
+        echo $output;
+
     }
     public function quickview(Request $request){
         $product_id = $request->product_id;

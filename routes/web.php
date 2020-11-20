@@ -23,6 +23,7 @@ Route::get('/danh-muc/{slug_category_product}','CategoryProduct@show_category_ho
 Route::get('/thuong-hieu/{brand_slug}','BrandProduct@show_brand_home');
 Route::get('/chi-tiet/{product_slug}','ProductController@details_product');
 Route::post('/quickview','ProductController@quickview');
+Route::post('/load-comment','ProductController@load_comment');
 
 //Backend
 Route::get('/admin','AdminController@index');
