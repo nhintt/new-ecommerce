@@ -253,6 +253,9 @@ a#scrollUp i{
 	color:#fdb45e;
 }
 
+.search_box {
+    float: right;
+}
 .search_box input {
   background: #F0F0E9;
   border: medium none;
@@ -263,10 +266,11 @@ a#scrollUp i{
   height: 35px;
   outline: medium none;
   padding-left: 10px;
-  width: 155px;
+  /* width: 155px; */
   background-image: url(../images/searchicon.png);
   background-repeat: no-repeat;
   background-position: 130px;
+  padding: 10px 16px;
 }
 
 
@@ -1101,6 +1105,7 @@ h2.title {
   margin-bottom: 25px;
   margin-top: 0;
   padding-left: 15px;
+  margin-left: 180px;
 }
 
 .pagination  li:first-child  a, .pagination  li:first-child  span {
@@ -2397,8 +2402,8 @@ h2.title {
   background:#FE980F;
   border: 0 none;
   border-radius: 0;
-  margin-top: 16px;
-  color: #fff;
+  /* margin-top: 16px; */
+  color: #fff !important;
 }
 
 .blank-arrow {

@@ -184,7 +184,7 @@
                         <div class="search_box">
                             <input type="text" style="" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm"/>
 
-                            <input type="submit" style="margin-top:3px;color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
+                            <input type="submit" style="color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
                             <div id="search-ajax"></div>
                         </div>
                         </form>
