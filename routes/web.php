@@ -44,7 +44,7 @@ Route::get('/edit-category-product/{category_product_id}','CategoryProduct@edit_
 Route::get('/delete-category-product/{category_product_id}','CategoryProduct@delete_category_product');
 Route::get('/all-category-product','CategoryProduct@all_category_product');
 
-Route::post('/export-csv','CategoryProduct@export_csv');
+Route::post('/export-csv','OrderController@export_csv');
 Route::post('/import-csv','CategoryProduct@import_csv');
 
 

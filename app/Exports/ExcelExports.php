@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\CategoryProductModel;
+use App\UserMailChimpModel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ExcelExports implements FromCollection
@@ -12,6 +12,7 @@ class ExcelExports implements FromCollection
     */
     public function collection()
     {
-        return CategoryProductModel::all();
+        return UserMailChimpModel::select('customer_email','customer_name','customer_phone')->get();
+
     }
 }
