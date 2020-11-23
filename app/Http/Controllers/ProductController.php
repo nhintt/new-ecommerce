@@ -10,6 +10,7 @@ use App\Video;
 use App\Gallery;
 use App\Comment;
 use App\Product;
+use App\Rating;
 use File;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -24,25 +25,79 @@ class ProductController extends Controller
             return Redirect::to('admin')->send();
         }
     }
+    public function reply_comment(Request $request){
+        $data = $request->all();
+        $comment = new Comment();
+        $comment->comment = $data['comment'];
+        $comment->comment_product_id = $data['comment_product_id'];
+        $comment->comment_parent_comment = $data['comment_id'];
+        $comment->comment_status = 0;
+        $comment->comment_name = 'Admin';
+        $comment->save();
+    }
+    public function allow_comment(Request $request){
+        $data = $request->all();
+        $comment = Comment::find($data['comment_id']);
+        $comment->comment_status = $data['comment_status'];
+        $comment->save();
+    }
+    public function list_comment(){
+        $comment = Comment::with('product')->where('comment_parent_comment','=',0)->orderBy('comment_id','DESC')->get();
+        $comment_rep = Comment::with('product')->where('comment_parent_comment','>',0)->get();
+        return view('admin.comment.list_comment')->with(compact('comment','comment_rep'));
+    }
+    public function send_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment_name = $request->comment_name;
+        $comment_content = $request->comment_content;
+        $comment = new Comment();
+        $comment->comment = $comment_content;
+        $comment->comment_name = $comment_name;
+        $comment->comment_product_id = $product_id;
+        $comment->comment_status = 1;
+        $comment->comment_parent_comment = 0;
+        $comment->save();
+    }
     public function load_comment(Request $request){
         $product_id = $request->product_id;
-        $comment = Comment::where('comment_product_id',$product_id)->get();
+        $comment = Comment::where('comment_product_id',$product_id)->where('comment_parent_comment','=',0)->where('comment_status',0)->get();
+        $comment_rep = Comment::with('product')->where('comment_parent_comment','>',0)->get();
         $output = '';
         foreach($comment as $key => $comm){
-            $output.= ' <div class="row style_comment">
+            $output.= '
+            <div class="row style_comment">
 
-                                            <div class="col-md-2">
+                    <div class="col-md-2">
 
-                                                <img width="100%" src="'.url('/public/frontend/images/batman-icon.png').'" class="img img-responsive img-thumbnail">
-                                            </div>
-                                            <div class="col-md-10">
-                                                <p style="color:green">@'.$comm->comment_name.'</p>
-                                                <p style="color:black">'.$comm->comment_date.'</p>
-                                                <p>'.$comm->comment.'</p>
-                                            </div>
-                                        </div><p></p>';
+                        <img width="100%" src="'.url('/public/frontend/images/batman-icon.png').'" class="img img-responsive img-thumbnail">
+                    </div>
+                    <div class="col-md-10">
+                        <p style="color:green">@'.$comm->comment_name.'</p>
+                        <p style="color:black">'.$comm->comment_date.'</p>
+                        <p>'.$comm->comment.'</p>
+                    </div>
+                </div><p></p>
+                ';
+                foreach($comment_rep as $key => $rep_comment){
+                    if($rep_comment->comment_parent_comment==$comm->comment_id){
+                $output.= '
+                            <div class="row style_comment" style="margin:5px -14px; background-color:bisque; margin-left: 39px">
 
-        }
+                                <div class="col-md-2">
+
+                                    <img width="80%" src="'.url('/public/frontend/images/businessman.jpg').'" class="img img-responsive img-thumbnail">
+                                </div>
+                                <div class="col-md-10">
+                                    <p style="color:blue">@Admin</p>
+                                    <p style="color:#000">'.$rep_comment->comment.'</p>
+                                    <p></p>
+                                </div>
+                            </div><p></p>';
+                    }
+                }
+
+
+        };
         echo $output;
 
     }
@@ -213,7 +268,12 @@ class ProductController extends Controller
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_slug',[$product_slug])->orderby(DB::raw('RAND()'))->paginate(3);
 
-        return view('pages.sanpham.show_details')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('gallery', $gallery)->with('getvideo',$getvideo);
+        $rating = Rating::where('product_id',$product_id)->avg('rating');
+
+        $rating = round($rating);
+
+
+         return view('pages.sanpham.show_details')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('gallery', $gallery)->with('getvideo',$getvideo)->with('rating', $rating);
 
     }
 }

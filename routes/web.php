@@ -22,9 +22,12 @@ Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
 Route::get('/danh-muc/{slug_category_product}','CategoryProduct@show_category_home');
 Route::get('/thuong-hieu/{brand_slug}','BrandProduct@show_brand_home');
 Route::get('/chi-tiet/{product_slug}','ProductController@details_product');
+Route::get('/comment','ProductController@list_comment');
 Route::post('/quickview','ProductController@quickview');
 Route::post('/load-comment','ProductController@load_comment');
-
+Route::post('/send-comment','ProductController@send_comment');
+Route::post('/allow-comment','ProductController@allow_comment');
+Route::post('/reply-comment','ProductController@reply_comment');
 //Backend
 Route::get('/admin','AdminController@index');
 Route::get('/dashboard','AdminController@show_dashboard');

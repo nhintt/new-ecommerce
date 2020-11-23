@@ -105,17 +105,38 @@
 
                                     </form>
 									<p><b>Viết đánh giá của bạn</b></p>
-
+                                        <ul class="list-inline" title="Average Rating">
+                                            @for($count=1; $count<=5; $count++)
+                                                @php
+                                                    if($count<=$rating){
+                                                        $color = 'color: #ffcc00';
+                                                    }else{
+                                                         $color = 'color: #ccc';
+                                                    }
+                                                @endphp
+                                            <li title="đánh giá sao"
+                                            id="{{$value->product_id}}-{{$count}}"
+                                            data-index="{{$count}}"
+                                            data-product_id="{{$value->product_id}}"
+                                            data-rating="{{$rating}}"
+                                            class="rating"
+                                            style="cursor:pointer; {{$color}} font-size:30px;"
+                                            >
+                                            &#9733;
+                                            </li>
+                                            @endfor
+                                        </ul>
 									<form action="#">
 										<span>
-											<input type="text" placeholder="Your Name"/>
-											<input type="email" placeholder="Email Address"/>
+											<input style="width:100%;margin-left: 0" type="text" class="comment_name" placeholder="Tên bình luận"/>
 										</span>
-										<textarea name="" ></textarea>
-										<b>Đánh giá: </b> <img src="{{asset('public/frontend/images/rating.png')}}" alt="" />
-										<button type="button" class="btn btn-default pull-right">
-											Submit
+										<textarea name="comment" class="comment_content" placeholder="Nội dung bình luận"></textarea>
+                                        <div id="notify_comment"></div>
+										<b>Đánh giá sao: </b> <img src="{{asset('public/frontend/images/rating.png')}}" alt="" />
+										<button type="button" class="btn btn-default pull-right send-comment">
+											Gửi bình luận
 										</button>
+
 									</form>
 								</div>
 							</div>
