@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5fbb56da6875810012d586c6&product=image-share-buttons' async='async'></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!---------Seo--------->
@@ -345,27 +346,6 @@
             </div>
         </div>
 
-
-            <div class="sidebar-contact wrapper-contact-form contact-form">
-                <div class="toggle"></div>
-                <div class="footer-widget">
-                    <div class="container">
-                        <div class="row">
-                                <div class="single-widget">
-                                    <h2>About Shopper</h2>
-                                    <form action="#" class="searchform">
-                                        <input type="text" placeholder="Your email address" />
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-                                        <p>Get the most recent updates from <br />our site and be updated your self...</p>
-                                    </form>
-                                </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
     </footer><!--/Footer-->
 
 
@@ -416,16 +396,6 @@
 
 
 <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.toggle').click(function() {
-            $('.sidebar-contact').toggleClass('active');
-            $('.toggle').toggleClass('active')
-        })
-    })
-</script>
-
-
 
 
     <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
@@ -447,6 +417,43 @@
 
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        load_comment();
+        function load_comment(){
+            var product_id = $('.comment_product_id').val();
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+                url: "{{url('/load-comment')}}",
+                method: "POST",
+                data:{product_id:product_id, _token:_token},
+                success: function(data){
+                $('#comment_show').html(data);
+                }
+            });
+        }
+        $('.send-comment').click(function(){
+            var product_id = $('.comment_product_id').val();
+            var comment_name = $('.comment_name').val();
+            var comment_content = $('.comment_content').val();
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+                url: "{{url('/send-comment')}}",
+                method: "POST",
+                data:{product_id:product_id, comment_name:comment_name, comment_content:comment_content, _token:_token},
+                success: function(data){
+
+                 $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công. Bình luận đang chờ duyệt</span>');
+                 load_comment();
+                 $('#notify_comment').fadeOut(9000);
+                 $('.comment_name').val('');
+                 $('.comment_content').val('');
+                }
+            });
+        });
+    });
+</script>
 
 <script type="text/javascript">
     $(document).ready(function() {
