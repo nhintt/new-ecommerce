@@ -56,7 +56,7 @@
 								<p><b>Số lượng kho còn:</b> {{$value->product_quantity}}</p>
 								<p><b>Thương hiệu:</b> {{$value->brand_name}}</p>
 								<p><b>Danh mục:</b> {{$value->category_name}}</p>
-								<a href=""><img src="{{asset('public/frontend/images/share.png')}}" class="share img-responsive"  alt="" /></a>
+								<!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
 							</div><!--/product-information-->
 						</div>
 </div><!--/product-details-->
