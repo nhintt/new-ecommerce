@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5fbb56da6875810012d586c6&product=image-share-buttons' async='async'></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!---------Seo--------->
@@ -370,10 +371,65 @@
 
 
 
+<div class="sidebar-contact wrapper-contact-form contact-form">
+    <div class="toggle"></div>
+
+    <!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://xyz.us7.list-manage.com/subscribe/post?u=42b033be5fd420caee311f779&amp;id=68201cfaff" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<h2>Đăng ký để nhận thông báo</h2>
+<div class="indicates-required"></div>
+<div class="mc-field-group">
+	<label for="mce-EMAIL">Email  <span class="asterisk">*</span>
+</label>
+	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+<div class="mc-field-group">
+	<label for="mce-FNAME">Họ tên </label>
+	<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+</div>
+<div class="mc-field-group ">
+	<label for="mce-PHONE">Điện thoại </label>
+	<input type="text" name="PHONE" class="" value="" id="mce-PHONE">
+</div>
+
+	<div id="mce-responses" class="clear">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_42b033be5fd420caee311f779_68201cfaff" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Đăng ký" name="subscribe" id="mc-embedded-subscribe" class=" btn btn-warning"></div>
+    </div>
+</form>
+</div>
 
 
 
-    <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
+<!--End mc_embed_signup-->
+
+
+</div>
+
+
+<script src="{{asset('public/frontend/js/jquery.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.toggle').click(function() {
+            $('.sidebar-contact').toggleClass('active');
+            $('.toggle').toggleClass('active')
+        })
+    })
+</script>
+
+
+
+
+    <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.scrollUp.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/price-range.js')}}"></script>
@@ -392,6 +448,43 @@
 
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        load_comment();
+        function load_comment(){
+            var product_id = $('.comment_product_id').val();
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+                url: "{{url('/load-comment')}}",
+                method: "POST",
+                data:{product_id:product_id, _token:_token},
+                success: function(data){
+                $('#comment_show').html(data);
+                }
+            });
+        }
+        $('.send-comment').click(function(){
+            var product_id = $('.comment_product_id').val();
+            var comment_name = $('.comment_name').val();
+            var comment_content = $('.comment_content').val();
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+                url: "{{url('/send-comment')}}",
+                method: "POST",
+                data:{product_id:product_id, comment_name:comment_name, comment_content:comment_content, _token:_token},
+                success: function(data){
+
+                 $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công. Bình luận đang chờ duyệt</span>');
+                 load_comment();
+                 $('#notify_comment').fadeOut(9000);
+                 $('.comment_name').val('');
+                 $('.comment_content').val('');
+                }
+            });
+        });
+    });
+</script>
 
 <script type="text/javascript">
     $(document).ready(function() {
