@@ -2314,10 +2314,11 @@ textarea {
 }
 
 .btn.btn-primary {
-    background: #FE980F;
-    border: 0 none;
-    border-radius: 0;
-    margin-top: 16px;
+  background:#FE980F;
+  border: 0 none;
+  border-radius: 0;
+  margin-top: 16px;
+  color: #fff;
 }
 
 .blank-arrow {
@@ -2448,9 +2449,6 @@ textarea {
     margin-bottom: 5%;
 }
 
-<<<<<<< HEAD
-/* -------Toggle-------------------------- */
-=======
 
 /* -------------------------------- */
 
@@ -2468,7 +2466,6 @@ textarea {
     font-size: 18px;
 }
 
->>>>>>> 1d08e575b8f1faef0ded7181345fe229aab56d7f
 .sidebar-contact {
     position: fixed;
     right: -350px;
@@ -2489,11 +2486,7 @@ textarea {
 
 .sidebar-contact input,
 .sidebar-contact textarea {
-<<<<<<< HEAD
-    /* width: 100%; */
-=======
     width: 100%;
->>>>>>> 1d08e575b8f1faef0ded7181345fe229aab56d7f
     height: 36px;
     padding: 5px;
     margin-bottom: 10px;
@@ -2508,11 +2501,7 @@ textarea {
 }
 
 .sidebar-contact input[type="submit"] {
-<<<<<<< HEAD
-    background: #6699cc;
-=======
     background: #FE980F;
->>>>>>> 1d08e575b8f1faef0ded7181345fe229aab56d7f
     color: #fff;
     cursor: pointer;
     border: none;
@@ -2522,11 +2511,7 @@ textarea {
 .sidebar-contact h2 {
     margin: 0 0 20px;
     padding: 0;
-<<<<<<< HEAD
-    color: #6699cc;
-=======
     color: #FE980F;
->>>>>>> 1d08e575b8f1faef0ded7181345fe229aab56d7f
 }
 
 .toggle {
@@ -2538,11 +2523,7 @@ textarea {
     left: -48px;
     text-align: center;
     cursor: pointer;
-<<<<<<< HEAD
-    background: #6699cc;
-=======
     background: #FE980F;
->>>>>>> 1d08e575b8f1faef0ded7181345fe229aab56d7f
 }
 
 .toggle:before {
@@ -2557,15 +2538,9 @@ textarea {
 }
 
 .site-section h4 {
-<<<<<<< HEAD
-    color: #6699cc;
-    font-weight: bold;
-}
-=======
     color: #FE980F;
     font-weight: bold;
 }
 
 
 /* --------------------------------------- */
->>>>>>> 1d08e575b8f1faef0ded7181345fe229aab56d7f

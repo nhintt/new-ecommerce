@@ -5,7 +5,7 @@
                     <style type="text/css">
                         .lSSlideOuter .lSPager.lSGallery img {
                             display: block;
-                            height: 140px;
+                            /* height: 140px; */
                             max-width: 100%;
                         }
                         li.active{
