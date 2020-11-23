@@ -236,8 +236,15 @@
           </tr>
         </tbody>
       </table>
-      <a target="_blank" href="{{url('/print-order/'.$details->order_code)}}" class="btn btn-warning">In đơn hàng</a>
-    </div>
+     <span style="display: flex;margin:20px ">
+      <a target="_blank" href="{{url('/print-order/'.$details->order_code)}}" style="margin-right:20px" class="btn btn-warning ">In đơn hàng</a>
+      <form action="{{url('/export-csv')}}" method="POST" >
+        @csrf
+     <input type="submit" value="Export User" name="export_csv" class="btn btn-success " >
+      </form>
+     </span>
+     </div>
+
 
   </div>
 </div>

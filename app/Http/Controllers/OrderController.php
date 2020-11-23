@@ -14,6 +14,10 @@ use App\Product;
 use App\Statistic;
 use Carbon\Carbon;
 use PDF;
+use App\Exports\ExcelExports;
+use App\Imports\ExcelImports;
+use Excel;
+use App\UserMailChimpModel;
 
 class OrderController extends Controller
 {
@@ -317,4 +321,12 @@ class OrderController extends Controller
         $getorder = Order::orderby('created_at', 'DESC')->paginate(5);
         return view('admin.manage_order')->with(compact('getorder'));
     }
+    public function export_csv(){
+        return Excel::download(new ExcelExports , 'User.xlsx');
+    }
+    // public function import_csv(Request $request){
+    //     $path = $request->file('file')->getRealPath();
+    //     Excel::import(new ExcelImports, $path);
+    //     return back();
+    // }
 }
