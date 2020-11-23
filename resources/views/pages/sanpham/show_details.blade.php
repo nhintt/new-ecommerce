@@ -51,11 +51,10 @@
 								<input type="button" value="Thêm giỏ hàng" class="btn btn-primary btn-sm add-to-cart" data-id_product="{{$value->product_id}}" name="add-to-cart">
 								</form>
 
-								<p><b>Tình trạng:</b> Còn hàng</p>
-								<p><b>Điều kiện:</b> Mơi 100%</p>
 								<p><b>Số lượng kho còn:</b> {{$value->product_quantity}}</p>
 								<p><b>Thương hiệu:</b> {{$value->brand_name}}</p>
 								<p><b>Danh mục:</b> {{$value->category_name}}</p>
+                                <br/>
 								<!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
 							</div><!--/product-information-->
 						</div>
