@@ -41,9 +41,9 @@ class HomeController extends Controller
         $getslider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
         $getvideo = Video::orderby('video_id','desc')->take(3)->get();
         //seo
-        $meta_desc = "Chuyên bán những phụ kiện ,thiết bị game";
-        $meta_keywords = "thiet bi game,phu kien game,game phu kien,game giai tri";
-        $meta_title = "Phụ kiện,máy chơi game chính hãng";
+        $meta_desc = "Chuyên bán những phụ kiện, điện thoại, laptop, tablet chính hãng";
+        $meta_keywords = "phu kien, dien thoai, laptop, chinh hang";
+        $meta_title = "Girlstore.com - Điện thoại, Laptop, Tablet, Phụ kiện chính hãng";
         $url_canonical = $request->url();
         //--seo
 

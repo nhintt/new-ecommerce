@@ -15,6 +15,6 @@ class ExportProduct implements ToModel
     public function model(array $row)
     {
         return Product::all();
-      
+
     }
 }
