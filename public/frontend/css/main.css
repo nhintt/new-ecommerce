@@ -1568,7 +1568,8 @@ h2.title {
 
 #cart_items .cart_info {
   border: 1px solid #E6E4DF;
-  margin-bottom: 50px
+  margin-bottom: 50px;
+  width: fit-content;
 }
 
 
@@ -1662,7 +1663,7 @@ h2.title {
 
 .cart_delete  {
   display: block;
-  margin-right: -12px;
+  /* margin-right: -12px; */
   overflow: hidden;
 }
 
