@@ -166,6 +166,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                             </ul>
                         </li>
+                         <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-book"></i>
+                                <span>Bình luận</span>
+                            </a>
+                            <ul class="sub">
+
+                                <li><a href="{{ URL::to('/comment') }}">Liệt kê bình luận</a></li>
+
+                            </ul>
+                        </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
@@ -233,6 +244,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="{{ asset('public/backend/js/jquery.form-validator.min.js') }}"></script>
     <script src="{{ asset('public/backend/js/jquery.dataTables.min.js') }}"></script>
 
+    <script type="text/javascript">
+        $('.comment_duyet_btn').click(function(){
+            var comment_status = $(this).data('comment_status');
+            var comment_id = $(this).data('comment_id');
+            var comment_product_id = $(this).attr('id');
+            if(comment_status==0){
+                var alert = 'Thay đổi thành duyệt thành công';
+            }else{
+                var alert = 'Thay đổi thành không duyệt thành công';
+            }
+                $.ajax({
+                    url:"{{url('/allow-comment')}}",
+                    method:"POST",
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{comment_status:comment_status,comment_id:comment_id,comment_product_id:comment_product_id},
+                    success:function(data){
+                        location.reload();
+                       $('#notify_comment').html('<span class="text text-alert">'+alert+'</span>')
+                    }
+                });
+
+        });
+        $('.btn-reply-comment').click(function(){
+            var comment_id = $(this).data('comment_id');
+
+            var comment = $('.reply_comment_'+comment_id).val();
+
+            var comment_product_id = $(this).data('product_id');
+
+
+            // alert(comment);
+            // alert(comment_id);
+            // alert(comment_product_id);
+
+
+                $.ajax({
+                    url:"{{url('/reply-comment')}}",
+                    method:"POST",
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{comment:comment,comment_id:comment_id,comment_product_id:comment_product_id},
+                    success:function(data){
+                       $('.reply_comment').val('');
+                       $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>')
+                    }
+                });
+
+        });
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {
