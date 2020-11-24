@@ -249,10 +249,11 @@
 										<script src="https://www.paypal.com/sdk/js?client-id=AVygrTpVjXIDJKIEVU8JV37gni6-E0a-8lyTkEikYac46fQVLb-sQAF2ESbibX-NYRcv-MsUyMH78uvP&currency=USD" data-sdk-integration-source="button-factory"></script>
 										<script>
 										  function initPayPalButton() {
+
 											var gia = <?=json_encode($total_after)?>;
-											console.log(parseInt(gia/23200));
-											var gia2=typeof(gia);
-											console.log(gia2);
+											//console.log(parseInt(gia/23200));
+											//var gia2=typeof(gia);
+											//console.log(gia2);
 											paypal.Buttons({
 											  style: {
 												shape: 'rect',
