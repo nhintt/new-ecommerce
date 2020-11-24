@@ -9,7 +9,7 @@
                             max-width: 100%;
                         }
                         li.active{
-                            border: 2px solid #FE980F;
+                            border: 2px solid #d70018;
                         }
                     </style>
 						<div class="col-sm-5">
