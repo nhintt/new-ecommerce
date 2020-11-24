@@ -43,7 +43,7 @@ class HomeController extends Controller
         //seo
         $meta_desc = "Chuyên bán những phụ kiện, điện thoại, laptop, tablet chính hãng";
         $meta_keywords = "phu kien, dien thoai, laptop, chinh hang";
-        $meta_title = "Girlstore.com - Điện thoại, Laptop, Tablet, Phụ kiện chính hãng";
+        $meta_title = "TechUp - Điện thoại, Laptop, Tablet, Phụ kiện chính hãng";
         $url_canonical = $request->url();
         //--seo
 
