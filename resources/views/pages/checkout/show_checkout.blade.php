@@ -50,10 +50,12 @@
 		                                    <label for="exampleInputPassword1">Chọn hình thức thanh toán</label>
 		                                      <select name="payment_select"  class="form-control input-sm m-bot15 payment_select">
 		                                            <option value="0">Qua chuyển khoản</option>
-		                                            <option value="1">Tiền mặt</option>
+                                                    <option value="1">Tiền mặt</option>
+                                                    <option valuee="2">Thanh toán Paypal</option>
 		                                    </select>
 		                                </div>
 									</div>
+
 									<input type="button" value="Xác nhận đơn hàng" name="send_order" class="btn btn-primary btn-sm send_order">
 								</form>
 								<!-- <form>
@@ -234,7 +236,54 @@
 												echo number_format($total_after,0,',','.').'đ';
 											}
 
+
+
 										@endphp
+										<div id="smart-button-container">
+											<div style="text-align: center;">
+											  <div id="paypal-button-container"></div>
+											</div>
+										  </div>
+
+										  // PayPal từ đoạn này
+										<script src="https://www.paypal.com/sdk/js?client-id=AVygrTpVjXIDJKIEVU8JV37gni6-E0a-8lyTkEikYac46fQVLb-sQAF2ESbibX-NYRcv-MsUyMH78uvP&currency=USD" data-sdk-integration-source="button-factory"></script>
+										<script>
+										  function initPayPalButton() {
+											var gia = <?=json_encode($total_after)?>;
+											console.log(parseInt(gia/23200));
+											var gia2=typeof(gia);
+											console.log(gia2);
+											paypal.Buttons({
+											  style: {
+												shape: 'rect',
+												color: 'gold',
+												layout: 'vertical',
+												label: 'paypal',
+
+											  },
+
+
+											  createOrder: function(data, actions) {
+												return actions.order.create({
+												  purchase_units: [{"amount":{"currency_code":"USD","value":parseInt(gia/23200)}}]
+												});
+											  },
+
+											  onApprove: function(data, actions) {
+												return actions.order.capture().then(function(details) {
+												  alert('Giao dịch được hoàn thành bởi ' + details.payer.name.given_name + '!');
+												});
+											  },
+
+											  onError: function(err) {
+												console.log(err);
+											  }
+											}).render('#paypal-button-container');
+										  }
+										  initPayPalButton();
+										</script>
+										// đến đoạn này
+
 										</li>
 
 									</td>
