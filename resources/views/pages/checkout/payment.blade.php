@@ -10,14 +10,14 @@
 				</ol>
 			</div>
 
-			
+
 			<div class="review-payment">
 				<h2>Xem lại giỏ hàng</h2>
 			</div>
 			<div class="table-responsive cart_info">
 				<?php
 				$content = Cart::content();
-				
+
 				?>
 				<table class="table table-condensed">
 					<thead>
@@ -55,7 +55,7 @@
 							</td>
 							<td class="cart_total">
 								<p class="cart_total_price">
-									
+
 									<?php
 									$subtotal = $v_content->price * $v_content->qty;
 									echo number_format($subtotal).' '.'vnđ';
@@ -86,7 +86,8 @@
 					<input type="submit" value="Đặt hàng" name="send_order_place" class="btn btn-primary btn-sm">
 			</div>
 			</form>
-		</div>
+        </div>
+
 	</section> <!--/#cart_items-->
 
-@endsection
+    @endsection

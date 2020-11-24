@@ -98,7 +98,7 @@
 
 
 							<td colspan="2">
-							<li>Tổng tiền :<span>{{number_format($total,0,',','.')}}đ</span></li>
+							<li  class="btn btn-default check_out text-cart">Tổng tiền :<span>{{number_format($total,0,',','.')}}đ</span></li>
 							@if(Session::get('coupon'))
 							<li>
 

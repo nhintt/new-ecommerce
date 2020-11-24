@@ -10,7 +10,7 @@
     <meta name="robots" content="INDEX,FOLLOW"/>
     <link  rel="canonical" href="{{$url_canonical}}" />
     <meta name="author" content="">
-    <link  rel="icon" type="image/x-icon" href="" />
+    <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/slider/logo1.png')}}" />
 
     {{--   <meta property="og:image" content="{{$image_og}}" />
       <meta property="og:site_name" content="http://localhost/tutorial_youtube/shopbanhanglaravel" />
@@ -43,6 +43,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
 </head><!--/head-->
 
 <body>
@@ -77,11 +78,11 @@
         <div class="header-middle"><!--header-middle-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="logo pull-left">
-                            <a href="index.html"><img src="{{asset('public/frontend/images/logo.png')}}" alt="" /></a>
+                    <div class="col-sm-3">
+                        <div class="logo pull-left" >
+                            <a href="index.html"><img style="width:35%;height:30%" src="{{asset('public/uploads/slider/logo1.png')}}" alt="" /></a>
                         </div>
-                        <div class="btn-group pull-right">
+                        {{--  <div class="btn-group pull-right">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
                                     USA
@@ -103,13 +104,24 @@
                                     <li><a href="#">Pound</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>  --}}
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5" style="margin-top: 18px">
+                        <form action="{{URL::to('/tim-kiem')}}" autocomplete="off" method="POST">
+                            {{csrf_field()}}
+                        <div class="search_box">
+                            <input class="search-input" type="text" style="" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm"/>
+                            <button class="btn btn-primary btn-search" name="search_items" type="submit"value="Tìm kiếm"></button>
+                            {{-- <input type="submit" style="color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm"> --}}
+                            <div id="search-ajax"></div>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-4" style="margin-top: 20px">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
 
-                                <li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
+                                {{-- <li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li> --}}
                                 <?php
                                    $customer_id = Session::get('customer_id');
                                    $shipping_id = Session::get('shipping_id');
@@ -179,7 +191,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-5">
+                    {{-- <div class="col-sm-5">
                         <form action="{{URL::to('/tim-kiem')}}" autocomplete="off" method="POST">
                             {{csrf_field()}}
                         <div class="search_box">
@@ -189,7 +201,7 @@
                             <div id="search-ajax"></div>
                         </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div><!--/header-bottom-->
@@ -381,7 +393,7 @@
             <div class="response" id="mce-success-response" style="display:none"></div>
         </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_adf6e7f3c44e23904d10b6ab5_6034d4fdd1" tabindex="-1" value=""></div>
-        <div class="clear"><input type="submit" value="Đăng ký" name="subscribe" id="mc-embedded-subscribe" style="background-color:#FE980F"class="button" ></div>
+        <div class="clear"><input type="submit" value="Đăng ký" name="subscribe" id="mc-embedded-subscribe" style="background-color:#d70018"class="button" ></div>
         </div>
     </form>
     </div>
@@ -517,7 +529,7 @@
                 var price = data[i].price;
                 var image = data[i].image;
                 var url = data[i].url;
-                $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+name+'</p><p style="color: #FE980F">'+price+'</p><a href="'+url+'">Đặt hàng</a></div></div>');
+                $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+name+'</p><p style="color: #d70018">'+price+'</p><a href="'+url+'">Đặt hàng</a></div></div>');
             }
         }
     }
@@ -551,7 +563,7 @@
             alert('Sản phẩm đã có trong danh sách yêu thích');
         }else{
             old_data.push(newItem);
-            $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+newItem.image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+newItem.name+'</p><p style="color: #FE980F">'+newItem.price+'</p><a href="'+newItem.url+'">Xem chi tiết</a></div></div>')
+            $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+newItem.image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+newItem.name+'</p><p style="color: #d70018">'+newItem.price+'</p><a href="'+newItem.url+'">Xem chi tiết</a></div></div>')
         }
 
         localStorage.setItem('data', JSON.stringify(old_data));

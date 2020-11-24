@@ -84,7 +84,7 @@
                                             color: #B3AFA8;
                                         }
                                         .button_wishlist span:hover{
-                                            color: #FE980F;
+                                            color: #d70018;
                                         }
                                         .button_wishlist:focus{
                                             border:none;
@@ -146,12 +146,12 @@
                             <p>Mã ID: <span id="product_quickview_id"></span></p>
 
 
-                                <p style="color: #FE980F ; font-size: 20px; font-weight: bold">Giá sản phẩm: <span id="product_quickview_price"></span></p><br/>
+                                <p style="color: #d70018 ; font-size: 20px; font-weight: bold">Giá sản phẩm: <span id="product_quickview_price"></span></p><br/>
                                 <!--<label>Số lượng: </label>-->
                                 <!--<input type="number" name="qty" min="1" class="cart_product_qty_" value="1" />-->
                                 <!--<input name="product_hidden" type="hidden" value="" />-->
 
-                            <h5 style="color: #FE980F; font-size: 20px; font-weight: bold">Mô tả sản phẩm</h5>
+                            <h5 style="color: #d70018; font-size: 20px; font-weight: bold">Mô tả sản phẩm</h5>
                             <hr>
                                 <p><span id="product_quickview_desc"></span></p>
                                 <p><span id="product_quickview_content"></span><p>

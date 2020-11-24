@@ -12,7 +12,7 @@
 							<input type="text" name="email_account" placeholder="Tài khoản" />
 							<input type="password" name="password_account" placeholder="Password" />
 							<span>
-								<input type="checkbox" class="checkbox"> 
+								<input type="checkbox" class="checkbox">
 								Ghi nhớ đăng nhập
 							</span>
 							<button type="submit" class="btn btn-default">Đăng nhập</button>
