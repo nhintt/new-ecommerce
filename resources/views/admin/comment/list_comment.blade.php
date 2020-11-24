@@ -20,7 +20,7 @@
             <th>Duyệt</th>
             <th>Tên người gửi</th>
             <th>Bình luận</th>
-            <th>Giá</th>
+            <th>Ngày bình luận</th>
             <th>Sản phẩm</th>
             <th>Quản lý</th>
 

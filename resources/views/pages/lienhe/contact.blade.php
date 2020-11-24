@@ -19,7 +19,7 @@
                                     placeholder="Nội dung"></textarea>
                             </div>
                             <div class="form-group">
-                                <button class="tm-more-button" type="submit" name="submit">Gửi</button>
+                                <button class="btn btn-success" type="submit" name="submit">Gửi</button>
                             </div>
                         </div>
 
