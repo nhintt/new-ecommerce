@@ -253,11 +253,9 @@ a#scrollUp i {
     background: none;
     color: #d70018;
 }
-
 .search_box {
-    float: right;
+    display: flex;
 }
-
 .search_box input {
     background: #F0F0E9;
     border: medium none;
@@ -265,16 +263,21 @@ a#scrollUp i {
     font-family: 'roboto';
     font-size: 12px;
     font-weight: 300;
-    height: 35px;
     outline: medium none;
-    padding-left: 10px;
-    /* width: 155px; */
-    background-image: url(../images/searchicon.png);
+    padding: 20px 25px;
+    width: 100%;
+    /* background-image: url(../images/searchicon.png);
     background-repeat: no-repeat;
-    background-position: 130px;
-    padding: 10px 16px;
+    background-position: 80%; */
 }
+.btn-search {
+    background-color: #F0F0E9 !important;
+}
+.btn-search:before {
+    content: url(../images/searchicon.png);
+    width: 50px;
 
+}
 
 /*  Dropdown menu*/
 

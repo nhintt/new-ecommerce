@@ -43,6 +43,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
 </head><!--/head-->
 
 <body>
@@ -77,7 +78,7 @@
         <div class="header-middle"><!--header-middle-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="logo pull-left" >
                             <a href="index.html"><img style="width:35%;height:30%" src="{{asset('public/uploads/slider/logo1.png')}}" alt="" /></a>
                         </div>
@@ -105,11 +106,22 @@
                             </div>
                         </div>  --}}
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5" style="margin-top: 18px">
+                        <form action="{{URL::to('/tim-kiem')}}" autocomplete="off" method="POST">
+                            {{csrf_field()}}
+                        <div class="search_box">
+                            <input class="search-input" type="text" style="" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm"/>
+                            <button class="btn btn-primary btn-search" name="search_items" type="submit"value="Tìm kiếm"></button>
+                            {{-- <input type="submit" style="color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm"> --}}
+                            <div id="search-ajax"></div>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-4" style="margin-top: 20px">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
 
-                                <li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
+                                {{-- <li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li> --}}
                                 <?php
                                    $customer_id = Session::get('customer_id');
                                    $shipping_id = Session::get('shipping_id');
@@ -179,7 +191,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-5">
+                    {{-- <div class="col-sm-5">
                         <form action="{{URL::to('/tim-kiem')}}" autocomplete="off" method="POST">
                             {{csrf_field()}}
                         <div class="search_box">
@@ -189,7 +201,7 @@
                             <div id="search-ajax"></div>
                         </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div><!--/header-bottom-->
