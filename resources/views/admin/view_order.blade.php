@@ -82,7 +82,7 @@
              <td>{{$shipping->shipping_phone}}</td>
              <td>{{$shipping->shipping_email}}</td>
              <td>{{$shipping->shipping_notes}}</td>
-             <td>@if($shipping->shipping_method==0) Chuyển khoản @else Tiền mặt @endif</td>
+             <td>@if($shipping->shipping_method==0) COD @elseif($shipping->shipping_method==1) Paypal @else Ngân lượng @endif</td>
 
 
           </tr>
@@ -165,11 +165,11 @@
 
               <input type="hidden" name="order_product_id" class="order_product_id" value="{{$details->product_id}}">
 
-             @if($order_status!=2)
+             <!-- @if($order_status!=2)
 
               <button class="btn btn-default update_quantity_order" data-product_id="{{$details->product_id}}" name="update_quantity_order">Cập nhật</button>
 
-            @endif
+            @endif -->
 
             </td>
             <td>{{number_format($details->product_price ,0,',','.')}}đ</td>

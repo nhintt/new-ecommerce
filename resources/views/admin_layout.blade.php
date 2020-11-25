@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Dashboard</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JRHV3NBW9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JRHV3NBW9Y');
+</script>
+    <title>Trang quản lý website TechUp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -17,6 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     </script>
     <!-- bootstrap-css -->
+    <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/slider/logo1.png')}}" />
     <link rel="stylesheet" href="{{ asset('public/backend/css/bootstrap.min.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- //bootstrap-css -->
@@ -54,9 +64,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <header class="header fixed-top clearfix">
             <!--logo start-->
             <div class="brand">
-                <a target="_blank" href="{{ url('/') }}" class="logo">
-                    Shop
-                </a>
+            <a href="{{ url('/') }}" target="_blank"  class="logo"><img style="width:25%;height:30%" src="{{asset('public/uploads/slider/logo1.png')}}" alt="" /> TechUp</a>
+
                 <div class="sidebar-toggle-box">
                     <div class="fa fa-bars"></div>
                 </div>
@@ -66,13 +75,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="top-nav clearfix">
                 <!--search & user info start-->
                 <ul class="nav pull-right top-menu">
-                    <li>
+                    <!-- <li>
                         <input type="text" class="form-control search" placeholder=" Search">
-                    </li>
+                    </li> -->
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="{{ 'public/backend/images/2.png' }}">
+                            <img alt="" src="{{asset('public/backend/images/2.jpg') }}">
                             <span class="username">
                                 <?php
                                 $name = Session::get('admin_name');
@@ -113,48 +122,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
-                                <span>Slider</span>
+                                <span>Thương hiệu sản phẩm</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="{{ URL::to('/add-slider') }}">Thêm slider</a></li>
-                                <li><a href="{{ URL::to('/manage-slider') }}">Liệt kê slider</a></li>
+                                <li><a href="{{ URL::to('/add-brand-product') }}">Thêm thương hiệu sản phẩm</a></li>
+                                <li><a href="{{ URL::to('/all-brand-product') }}">Danh sách thương hiệu sản phẩm</a></li>
+
                             </ul>
                         </li>
 
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-book"></i>
-                                <span>Đơn hàng</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="{{ URL::to('/manage-order') }}">Quản lý đơn hàng</a></li>
-
-
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-book"></i>
-                                <span>Mã giảm giá</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="{{ URL::to('/insert-coupon') }}">Quản lý mã giảm giá</a></li>
-                                <li><a href="{{ URL::to('/list-coupon') }}">Liệt kê mã giảm giá</a></li>
-                            </ul>
-                        </li>
-                        <!-- <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-book"></i>
-                                <span>Vận chuyển</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="{{ URL::to('/delivery') }}">Quản lý vận chuyển</a></li>
-
-
-
-                            </ul>
-                        </li> -->
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
@@ -162,32 +138,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </a>
                             <ul class="sub">
                                 <li><a href="{{ URL::to('/add-category-product') }}">Thêm danh mục sản phẩm</a></li>
-                                <li><a href="{{ URL::to('/all-category-product') }}">Liệt kê danh mục sản phẩm</a></li>
+                                <li><a href="{{ URL::to('/all-category-product') }}">Danh sách danh mục sản phẩm</a></li>
 
                             </ul>
                         </li>
-                         <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-book"></i>
-                                <span>Bình luận</span>
-                            </a>
-                            <ul class="sub">
 
-                                <li><a href="{{ URL::to('/comment') }}">Liệt kê bình luận</a></li>
-
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-book"></i>
-                                <span>Thương hiệu sản phẩm</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="{{ URL::to('/add-brand-product') }}">Thêm hiệu sản phẩm</a></li>
-                                <li><a href="{{ URL::to('/all-brand-product') }}">Liệt kê thương hiệu sản phẩm</a></li>
-
-                            </ul>
-                        </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
@@ -195,28 +150,64 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </a>
                             <ul class="sub">
                                 <li><a href="{{ URL::to('/add-product') }}">Thêm sản phẩm</a></li>
-                                <li><a href="{{ URL::to('/all-product') }}">Liệt kê sản phẩm</a></li>
+                                <li><a href="{{ URL::to('/all-product') }}">Danh sách sản phẩm</a></li>
 
                             </ul>
                         </li>
-                        <!-- <li class="sub-menu">
+
+                        <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
-                                <span>Users</span>
+                                <span>Đơn hàng</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="{{ URL::to('/add-users') }}">Thêm user</a></li>
-                                <li><a href="{{ URL::to('/users') }}">Liệt kê user</a></li>
+                                <li><a href="{{ URL::to('/manage-order') }}">Danh sách đơn hàng</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-book"></i>
+                                <span>Mã giảm giá</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="{{ URL::to('/insert-coupon') }}">Thêm mã giảm giá</a></li>
+                                <li><a href="{{ URL::to('/list-coupon') }}">Danh sách mã giảm giá</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-book"></i>
+                                <span>Slider</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="{{ URL::to('/add-slider') }}">Thêm slider</a></li>
+                                <li><a href="{{ URL::to('/manage-slider') }}">Danh sách slider</a></li>
+                            </ul>
+                        </li>
+
+                        </li>
+
+                         <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-book"></i>
+                                <span>Bình luận</span>
+                            </a>
+                            <ul class="sub">
+
+                                <li><a href="{{ URL::to('/comment') }}">Danh sách bình luận</a></li>
 
                             </ul>
-                        </li> -->
+                        </li>
+
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
                                 <span>Video</span>
                             </a>
                             <ul class="sub">
-                                 <li><a href="{{URL::to('/list-video')}}">Thêm video</a></li>
+                                 <li><a href="{{URL::to('/list-video')}}">Danh sách video</a></li>
 
                             </ul>
                         </li>
@@ -300,7 +291,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script type="text/javascript">
         $(document).ready(function() {
             chart30daysorder();
-
+            try{
             var chart = new Morris.Bar({
                 element: 'chart',
                 lineColors: ['#819C79', '#fc8710', '#FF6541', '#A4ADD3', '#766B56'],
@@ -311,6 +302,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 behaveLikeLine: true,
                 labels: ['đơn hàng', 'doanh số', 'lợi nhuận', 'số lượng']
             });
+            chart30daysorder();
+                }catch(e){
+                   console.log(e)
+                }
 
             function chart30daysorder() {
                 var _token = $('input[name="_token"]').val();
@@ -323,6 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     },
 
                     success: function(data) {
+                        if(chart && chart.setData)
                         chart.setData(data);
                     }
                 });
@@ -370,7 +366,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <script type="text/javascript">
         $(document).ready(function() {
-            // var colorDanger = "#FF1744";
+            try{
             var donut = Morris.Donut({
                 element: 'donut',
                 resize: true,
@@ -399,6 +395,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         value: <?php echo $customer ?>
                     }]
             });
+        }catch(e){
+                console.log(e)
+            }
+
 
         });
     </script>
@@ -889,7 +889,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             function gd(year, day, month) {
                 return new Date(year, month - 1, day).getTime();
             }
-
+            try{
             graphArea2 = Morris.Area({
                 element: 'hero-area',
                 padding: 10,
@@ -967,7 +967,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 hideHover: 'auto',
                 resize: true
             });
-
+        }catch(e){console.log(e)}
 
         });
 
