@@ -80,7 +80,7 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="logo pull-left" >
-                            <a href="index.html"><img style="width:35%;height:30%" src="{{asset('public/uploads/slider/logo1.png')}}" alt="" /></a>
+                            <a href=""><img style="width:35%;height:30%" src="{{asset('public/uploads/slider/logo1.png')}}" alt="" /></a>
                         </div>
                         {{--  <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -529,7 +529,7 @@
                 var price = data[i].price;
                 var image = data[i].image;
                 var url = data[i].url;
-                $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+name+'</p><p style="color: #d70018">'+price+'</p><a href="'+url+'">Đặt hàng</a></div></div>');
+                $('#row_wishlist').append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+image+'" width="100%"></div><div class="col-md-8 info_wishlist"><p>'+name+'</p><p style="color: #d70018">'+price+'</p><a href="'+url+'">Xem chi tiết</a></div></div>');
             }
         }
     }
@@ -570,7 +570,7 @@
     }
 </script>
 
-<!--Autocomplete tìm kiếm-->
+<!--Quickview-->
 <script type="text/javascript">
     $('.xemnhanh').click(function(){
         var product_id = $(this).data('id_product');
@@ -593,6 +593,7 @@
     });
 </script>
 
+<!--Autocomplete tìm kiếm-->
 <script type="text/javascript">
     $('#keywords').keyup(function(){
         var query = $(this).val();
@@ -662,7 +663,7 @@ $(document).ready(function() {
                         var shipping_address = $('.shipping_address').val();
                         var shipping_phone = $('.shipping_phone').val();
                         var shipping_notes = $('.shipping_notes').val();
-                        var shipping_method = $('.payment_select').val();
+                        var shipping_method = $('.shipping_method').val();
                         var order_fee = $('.order_fee').val();
                         var order_coupon = $('.order_coupon').val();
                         var _token = $('input[name="_token"]').val();

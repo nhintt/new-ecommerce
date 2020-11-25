@@ -48,49 +48,16 @@
 									<div class="">
 										 <div class="form-group">
 		                                    <label for="exampleInputPassword1">Chọn hình thức thanh toán</label>
-		                                      <select name="payment_select"  class="form-control input-sm m-bot15 payment_select">
-		                                            <option value="0">Qua chuyển khoản</option>
-                                                    <option value="1">Tiền mặt</option>
-                                                    <option valuee="2">Thanh toán Paypal</option>
+		                                      <select name="shipping_method"  class="form-control input-sm m-bot15 shipping_method">
+		                                            <option value="0">COD</option>
+                                                    <option value="1">Paypal</option>
+                                                    <option value="2">Ngân lượng</option>
 		                                    </select>
 		                                </div>
 									</div>
 
 									<input type="button" value="Xác nhận đơn hàng" name="send_order" class="btn btn-primary btn-sm send_order">
 								</form>
-								<!-- <form>
-                                    @csrf
-
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Chọn thành phố</label>
-                                      <select name="city" id="city" class="form-control input-sm m-bot15 choose city">
-
-                                            <option value="">--Chọn tỉnh thành phố--</option>
-                                        @foreach($city as $key => $ci)
-                                            <option value="{{$ci->matp}}">{{$ci->name_city}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Chọn quận huyện</label>
-                                      <select name="province" id="province" class="form-control input-sm m-bot15 province choose">
-                                            <option value="">--Chọn quận huyện--</option>
-
-                                    </select>
-                                </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputPassword1">Chọn xã phường</label>
-                                      <select name="wards" id="wards" class="form-control input-sm m-bot15 wards">
-                                            <option value="">--Chọn xã phường--</option>
-                                    </select>
-                                </div>
-
-
-                              	<input type="button" value="Tính phí vận chuyển" name="calculate_order" class="btn btn-primary btn-sm calculate_delivery">
-
-
-                                </form> -->
 
 							</div>
 
@@ -244,8 +211,7 @@
 											  <div id="paypal-button-container"></div>
 											</div>
 										  </div>
-
-										  // PayPal từ đoạn này
+                                            <!-- Paypal -->
 										<script src="https://www.paypal.com/sdk/js?client-id=AVygrTpVjXIDJKIEVU8JV37gni6-E0a-8lyTkEikYac46fQVLb-sQAF2ESbibX-NYRcv-MsUyMH78uvP&currency=USD" data-sdk-integration-source="button-factory"></script>
 										<script>
 										  function initPayPalButton() {
@@ -256,7 +222,7 @@
 											//console.log(gia2);
 											paypal.Buttons({
 											  style: {
-												shape: 'rect',
+												shape: 'pill',
 												color: 'gold',
 												layout: 'vertical',
 												label: 'paypal',
@@ -283,7 +249,7 @@
 										  }
 										  initPayPalButton();
 										</script>
-										// đến đoạn này
+										<!-- End Paypal -->
 
 										</li>
 
