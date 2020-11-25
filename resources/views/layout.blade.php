@@ -10,14 +10,26 @@
     <meta name="robots" content="INDEX,FOLLOW"/>
     <link  rel="canonical" href="{{$url_canonical}}" />
     <meta name="author" content="">
-    <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/slider/logo1.png')}}" />
+    {{--  cach1  --}}
+    {{--  @isset($image_og)
+    <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/product/'.$image_og)}}"  />
+     @endisset
+     @empty($image_og)
+   <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/slider/logo1.png')}}" />
+      @endempty  --}}
 
-    {{--   <meta property="og:image" content="{{$image_og}}" />
-      <meta property="og:site_name" content="http://localhost/tutorial_youtube/shopbanhanglaravel" />
+    {{--  <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/slider/logo1.png')}}" />  --}}
+    {{--  <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/product/'.$image_og)}}"  />  --}}
+
+    {{--  cách 2  --}}
+    <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/product')}}<?= isset($image_og) ? '/'.$image_og:'/logo1.png'?> "  />
+
+     <meta property="og:image" href="{{asset('public/uploads/product')}}<?= isset($image_og) ? '/'.$image_og:'/logo1.png'?> "  />
+      <meta property="og:site_name" content="https://ecommerce-2020.xyz/" />
       <meta property="og:description" content="{{$meta_desc}}" />
       <meta property="og:title" content="{{$meta_title}}" />
       <meta property="og:url" content="{{$url_canonical}}" />
-      <meta property="og:type" content="website" /> --}}
+      <meta property="og:type" content="website" />
     <!--//-------Seo--------->
     <title>{{$meta_title}}</title>
     <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">

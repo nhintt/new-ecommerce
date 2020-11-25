@@ -253,6 +253,7 @@ class ProductController extends Controller
             $category_id = $value->category_id;
             $product_id = $value->product_id;
                 //seo
+                $image_og=$value->product_image;
                 $meta_desc = $value->product_desc;
                 $meta_keywords = $value->product_slug;
                 $meta_title = $value->product_name;
@@ -273,7 +274,8 @@ class ProductController extends Controller
         $rating = round($rating);
 
 
-         return view('pages.sanpham.show_details')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('gallery', $gallery)->with('getvideo',$getvideo)->with('rating', $rating);
+         return view('pages.sanpham.show_details')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('getslider',$getslider)->with('gallery', $gallery)->with('getvideo',$getvideo)->with('rating', $rating)->with('image_og',$image_og);
 
     }
 }
+
