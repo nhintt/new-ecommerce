@@ -291,7 +291,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script type="text/javascript">
         $(document).ready(function() {
             chart30daysorder();
-
+            try{
             var chart = new Morris.Bar({
                 element: 'chart',
                 lineColors: ['#819C79', '#fc8710', '#FF6541', '#A4ADD3', '#766B56'],
@@ -302,6 +302,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 behaveLikeLine: true,
                 labels: ['đơn hàng', 'doanh số', 'lợi nhuận', 'số lượng']
             });
+            chart30daysorder();
+                }catch(e){
+                   console.log(e)
+                }
 
             function chart30daysorder() {
                 var _token = $('input[name="_token"]').val();
@@ -314,6 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     },
 
                     success: function(data) {
+                        if(chart && chart.setData)
                         chart.setData(data);
                     }
                 });
@@ -361,7 +366,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <script type="text/javascript">
         $(document).ready(function() {
-            // var colorDanger = "#FF1744";
+            try{
             var donut = Morris.Donut({
                 element: 'donut',
                 resize: true,
@@ -390,6 +395,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         value: <?php echo $customer ?>
                     }]
             });
+        }catch(e){
+                console.log(e)
+            }
+
 
         });
     </script>
@@ -880,7 +889,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             function gd(year, day, month) {
                 return new Date(year, month - 1, day).getTime();
             }
-
+            try{
             graphArea2 = Morris.Area({
                 element: 'hero-area',
                 padding: 10,
@@ -958,7 +967,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 hideHover: 'auto',
                 resize: true
             });
-
+        }catch(e){console.log(e)}
 
         });
 
