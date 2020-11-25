@@ -66,7 +66,10 @@
             </td>
 
             <td>{{ $comm->comment_date }}</td>
-            <td><a href="{{url('/chi-tiet/'.$comm->product->product_slug)}}" target="_blank">{{ $comm->product->product_name }}</a></td>
+            <td>
+                  @if($comm->product)
+                <a href="{{url('/chi-tiet/'.$comm->product->product_slug)}}" target="_blank">{{ $comm->product->product_name }}</a>
+                  @endif</td>
 
             <td>
               <a href="" class="active styling-edit" ui-toggle-class="">
