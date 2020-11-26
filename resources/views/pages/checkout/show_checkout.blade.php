@@ -92,12 +92,20 @@
 									@if(Session::get('cart')==true)
 									@php
 											$total = 0;
+											$itemList = array();
 									@endphp
 									@foreach(Session::get('cart') as $key => $cart)
 										@php
 											$subtotal = $cart['product_price']*$cart['product_qty'];
 											$total+=$subtotal;
+											$thisPriceToUSD = round($cart['product_price']/23200,2);
 										@endphp
+										<?php
+											$subunit = ['value'=>$thisPriceToUSD.'','currency_code'=>'USD'];
+											$item = ['name'=>$cart['product_name'],'unit_amount'=>$subunit,'quantity'=>$cart['product_qty'] ];
+											array_push($itemList,$item);
+
+										?>
 
 									<tr>
 										<td class="cart_product">
@@ -217,9 +225,11 @@
 										  function initPayPalButton() {
 
 											var gia = <?=json_encode($total_after)?>;
-											//console.log(parseInt(gia/23200));
-											//var gia2=typeof(gia);
-											//console.log(gia2);
+											var list = <?=json_encode($itemList)?>;
+											var totalToUSD  =(gia/23200).toFixed(2)+"";
+											console.log(list);
+											console.log((gia/23200).toFixed(2));
+
 											paypal.Buttons({
 											  style: {
 												shape: 'pill',
@@ -229,11 +239,21 @@
 
 											  },
 
-
 											  createOrder: function(data, actions) {
 												return actions.order.create({
-												  purchase_units: [{"amount":{"currency_code":"USD","value":parseInt(gia/23200)}}]
-												});
+													purchase_units: [{
+														amount: {
+															value: totalToUSD,
+															currency_code: 'USD',
+															breakdown: {
+																item_total: {value: totalToUSD, currency_code: 'USD'}
+															}
+														},
+														items:list
+
+													}]
+												}
+												);
 											  },
 
 											  onApprove: function(data, actions) {
