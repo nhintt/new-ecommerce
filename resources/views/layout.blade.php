@@ -19,7 +19,7 @@
     <meta name="robots" content="INDEX,FOLLOW"/>
     <link  rel="canonical" href="{{$url_canonical}}" />
     <meta name="author" content="">
-    {{--  cach1  --}}
+
     {{--  @isset($image_og)
     <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/product/'.$image_og)}}"  />
      @endisset
@@ -30,7 +30,7 @@
     {{--  <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/slider/logo1.png')}}" />  --}}
     {{--  <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/product/'.$image_og)}}"  />  --}}
 
-    {{--  cách 2  --}}
+
     <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/product')}}<?= isset($image_og) ? '/'.$image_og:'/logo1.png'?> "  />
 
      <meta property="og:image" content="{{asset('public/uploads/product')}}<?= isset($image_og) ? '/'.$image_og:'/logo1.png'?> "  />
@@ -84,11 +84,11 @@
                     <div class="col-sm-6">
                         <div class="social-icons pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -450,8 +450,8 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script>
+    {{-- <div id="fb-root"></div> --}}
+{{-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2339123679735877&autoLogAppEvents=1"></script> --}}
 <script type="text/javascript">
     $(document).ready(function(){
 

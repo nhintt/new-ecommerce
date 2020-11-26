@@ -23,7 +23,7 @@
                                             <input type="hidden" value="1" class="cart_product_qty_{{$product->product_id}}">
 
                                             <a id="wishlist_producturl{{$product->product_id}}" href="{{URL::to('/chi-tiet/'.$product->product_slug)}}">
-                                                <img id="wishlist_productimage{{$product->product_id}}" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="Hình ảnh" />
+                                                <img id="wishlist_productimage{{$product->product_id}}" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="{{$product->product_name}}" />
                                                 <h2>{{number_format($product->product_price,0,',','.').' '.'VNĐ'}}</h2>
                                                 <p>{{$product->product_name}}</p>
                                              </a>
