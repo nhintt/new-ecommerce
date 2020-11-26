@@ -33,13 +33,13 @@
     {{--  cách 2  --}}
     <link  rel="icon" type="image/x-icon" href="{{asset('public/uploads/product')}}<?= isset($image_og) ? '/'.$image_og:'/logo1.png'?> "  />
 
-     <meta property="og:image" href="{{asset('public/uploads/product')}}<?= isset($image_og) ? '/'.$image_og:'/logo1.png'?> "  />
+     <meta property="og:image" content="{{asset('public/uploads/product')}}<?= isset($image_og) ? '/'.$image_og:'/logo1.png'?> "  />
       <meta property="og:site_name" content="https://ecommerce-2020.xyz/" />
       <meta property="og:description" content="{{$meta_desc}}" />
       <meta property="og:title" content="{{$meta_title}}" />
       <meta property="og:url" content="{{$url_canonical}}" />
       <meta property="og:type" content="website" />
-    <!--//-------Seo--------->
+    <!---------Seo--------->
     <title>{{$meta_title}}</title>
     <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">

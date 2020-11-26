@@ -254,7 +254,7 @@ class ProductController extends Controller
             $product_id = $value->product_id;
                 //seo
                 $image_og=$value->product_image;
-                $meta_desc = $value->product_desc;
+                $meta_desc = strip_tags( $value->product_desc);
                 $meta_keywords = $value->product_slug;
                 $meta_title = $value->product_name;
                 $url_canonical = $request->url();
