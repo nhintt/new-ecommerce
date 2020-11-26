@@ -10,6 +10,7 @@
 
   gtag('config', 'G-JRHV3NBW9Y');
 </script>
+<meta name="google-site-verification" content="UjIXiJQcmYosK8d8srsdo_CEI8KZxx4sybt2nEGNKgA" />
     <title>Trang quản lý website TechUp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

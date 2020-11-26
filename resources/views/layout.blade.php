@@ -10,6 +10,7 @@
 
   gtag('config', 'G-JRHV3NBW9Y');
 </script>
+<meta name="google-site-verification" content="UjIXiJQcmYosK8d8srsdo_CEI8KZxx4sybt2nEGNKgA" />
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5fbb56da6875810012d586c6&product=image-share-buttons' async='async'></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -138,7 +139,7 @@
                         </div>
 
                         </form>
-                        <div id="search-ajax" style="z-index: 99"></div>
+                        <div id="search-ajax"></div>
                     </div>
                     <div class="col-sm-4" style="margin-top: 20px">
                         <div class="shop-menu pull-right">
