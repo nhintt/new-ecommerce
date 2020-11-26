@@ -134,9 +134,11 @@
                             <input class="search-input" type="text" style="" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm"/>
                             <button class="btn btn-primary btn-search" name="search_items" type="submit"value="Tìm kiếm"></button>
                             {{-- <input type="submit" style="color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm"> --}}
-                            <div id="search-ajax"></div>
+
                         </div>
+
                         </form>
+                        <div id="search-ajax" style="z-index: 99"></div>
                     </div>
                     <div class="col-sm-4" style="margin-top: 20px">
                         <div class="shop-menu pull-right">
