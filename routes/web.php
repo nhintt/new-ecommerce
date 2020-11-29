@@ -137,6 +137,9 @@ Route::post('/save-checkout-customer','CheckoutController@save_checkout_customer
 Route::post('/calculate-fee','CheckoutController@calculate_fee');
 Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
 Route::post('/confirm-order','CheckoutController@confirm_order');
+Route::post('/create','CheckoutController@create');
+Route::get('/vnpay','CheckoutController@vnpay');
+Route::get('/returnvnp','CheckoutController@returnvnp');
 
 //Order
 Route::get('/delete-order/{order_code}','OrderController@order_code');

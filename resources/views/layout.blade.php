@@ -55,7 +55,10 @@
     <link href="{{asset('public/frontend/css/prettify.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    {{--  <link href="/vnpay_php/assets/bootstrap.min.css" rel="stylesheet"/>
 
+    <link href="/vnpay_php/assets/jumbotron-narrow.css" rel="stylesheet">
+    <script src="/vnpay_php/assets/jquery-1.11.3.min.js"></script>  --}}
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
