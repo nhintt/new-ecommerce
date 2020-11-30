@@ -1,6 +1,6 @@
 @extends('layout')
-@section('content')
 
+@section('content')
 <section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -195,7 +195,8 @@
 											<?php $total_after_fee = $total + Session::get('fee'); ?>
 										@endif
 										<li>Tổng còn:
-										@php
+                                        @php
+                                        $total_after = 0;
 											if(Session::get('fee') && !Session::get('coupon')){
 												$total_after = $total_after_fee;
 												echo number_format($total_after,0,',','.').'đ';
@@ -210,7 +211,7 @@
 												$total_after = $total;
 												echo number_format($total_after,0,',','.').'đ';
 											}
-
+                                            $ta = $total_after;
 
 
 										@endphp
@@ -339,8 +340,8 @@
                     </div>
                     <h3>Xác Nhận đơn hàng</h3>
                     <div class="table-responsive">
-                        <form action="/vnpay_php/vnpay_create_payment.php" id="create_form" method="post">
-
+                        <form action="{{URL::to('/create')}}" id="create_form" method="post">
+                            @csrf
                             <div class="form-group">
                                 <label for="language"></label>
                                 <select name="order_type" id="order_type" class="form-control">
@@ -356,7 +357,8 @@
 
                                 <label for="amount">Tổng tiền</label>
                                 <input class="form-control" id="amount"
-                                       name="amount" type="number" value="10000" />
+                                       name="amount" type="number" value="100000" />
+
 
                             </div>
                             <div class="form-group">

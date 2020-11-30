@@ -138,6 +138,7 @@ Route::post('/calculate-fee','CheckoutController@calculate_fee');
 Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
 Route::post('/confirm-order','CheckoutController@confirm_order');
 Route::post('/create','CheckoutController@create');
+Route::get('/create','CheckoutController@create');
 Route::get('/vnpay','CheckoutController@vnpay');
 Route::get('/returnvnp','CheckoutController@returnvnp');
 

@@ -309,8 +309,8 @@ class CheckoutController extends Controller
 
     public function create(Request $request)
     {
-        // session(['cost_id' => $request->id]);
-        // session(['url_prev' => url()->previous()]);
+        session(['cost_id' => $request->id]);
+        session(['url_prev' => url()->previous()]);
         $vnp_TmnCode = "7Z0234XA"; //Mã website tại VNPAY
         $vnp_HashSecret = "EYUPBUR2P8JY71U46JXEYUARJP8TFKCW"; //Chuỗi bí mật
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -363,6 +363,7 @@ class CheckoutController extends Controller
             $returnData = array('code' => '00'
         , 'message' => 'success'
         , 'data' => $vnp_Url);
+
     echo json_encode($returnData);
 
         return redirect::to($vnp_Url);
