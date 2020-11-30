@@ -258,7 +258,29 @@
 
 											  onApprove: function(data, actions) {
 												return actions.order.capture().then(function(details) {
-												  alert('Giao dịch được hoàn thành bởi ' + details.payer.name.given_name + '!');
+                                                  alert('Giao dịch được hoàn thành bởi ' + details.payer.name.given_name + '!');
+                                                  var shipping_email = $('.shipping_email').val();
+                                                  var shipping_name = $('.shipping_name').val();
+                                                  var shipping_address = $('.shipping_address').val();
+                                                  var shipping_phone = $('.shipping_phone').val();
+                                                  var shipping_notes = $('.shipping_notes').val();
+                                                  var shipping_method = $('.shipping_method').val();
+                                                  var order_fee = $('.order_fee').val();
+                                                  var order_coupon = $('.order_coupon').val();
+                                                  var _token = $('input[name="_token"]').val();
+
+                                                  $.ajax({
+                                                      url: '{{url('/confirm-order')}}',
+                                                      method: 'POST',
+                                                      data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
+                                                      success:function(){
+                                                         swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
+                                                      }
+                                                  });
+
+                                                  window.setTimeout(function(){
+                                                      location.reload();
+                                                  } ,3000);
 												});
 											  },
 
@@ -331,9 +353,10 @@
                                 <input class="form-control" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>" />
                             </div>
                             <div class="form-group">
+
                                 <label for="amount">Tổng tiền</label>
                                 <input class="form-control" id="amount"
-                                       name="amount" type="number" value="{{$total_after}}" />
+                                       name="amount" type="number" value="10000" />
 
                             </div>
                             <div class="form-group">
@@ -376,7 +399,8 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán </button>
+                            <button type="submit" class="btn btn-primary send_order" id="btnPopup" >Thanh toán </button>
+                            <input type="submit" value="Xác nhận đơn hàng" name="send_order" id="btnPopup"  class="btn btn-primary btn-sm send_order">
 
                         </form>
                     </div>
