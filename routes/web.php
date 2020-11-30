@@ -140,7 +140,7 @@ Route::post('/confirm-order','CheckoutController@confirm_order');
 Route::post('/create','CheckoutController@create');
 Route::get('/create','CheckoutController@create');
 Route::get('/vnpay','CheckoutController@vnpay');
-Route::get('/returnvnp','CheckoutController@returnvnp');
+Route::get('/return','CheckoutController@return');
 
 //Order
 Route::get('/delete-order/{order_code}','OrderController@order_code');

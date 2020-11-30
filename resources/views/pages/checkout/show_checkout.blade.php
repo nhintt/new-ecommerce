@@ -357,7 +357,7 @@
 
                                 <label for="amount">Tổng tiền</label>
                                 <input class="form-control" id="amount"
-                                       name="amount" type="number" value="100000" />
+                                       name="amount" type="number" value="<?= isset($total_after) ? $total_after: "0" ?>" />
 
 
                             </div>
@@ -401,7 +401,7 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary send_order" id="btnPopup" >Thanh toán </button>
+
                             <input type="submit" value="Xác nhận đơn hàng" name="send_order" id="btnPopup"  class="btn btn-primary btn-sm send_order">
 
                         </form>

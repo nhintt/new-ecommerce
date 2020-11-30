@@ -369,7 +369,7 @@ class CheckoutController extends Controller
         return redirect::to($vnp_Url);
     }
 
-    public function returnvnp(Request $request)
+    public function return(Request $request)
 {
     $url = session('url_prev','/');
     if($request->vnp_ResponseCode == "00") {
