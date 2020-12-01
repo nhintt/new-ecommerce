@@ -2,7 +2,7 @@
 
 @section('content')
 <section id="cart_items">
-		<div class="container">
+		{{-- <div class="container"> --}}
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="{{URL::to('/')}}">Trang chủ</a></li>
@@ -23,11 +23,11 @@
 							<div class="form-one">
 								<form method="POST">
 									@csrf
-									<input type="text" name="shipping_email" class="shipping_email" placeholder="Điền email">
-									<input type="text" name="shipping_name" class="shipping_name" placeholder="Họ và tên người gửi">
-									<input type="text" name="shipping_address" class="shipping_address" placeholder="Địa chỉ gửi hàng">
-									<input type="text" name="shipping_phone" class="shipping_phone" placeholder="Số điện thoại">
-									<textarea name="shipping_notes" class="shipping_notes" placeholder="Ghi chú đơn hàng của bạn" rows="5"></textarea>
+									<input type="text" name="shipping_email" class="shipping_email" placeholder="Điền email" required>
+									<input type="text" name="shipping_name" class="shipping_name" placeholder="Họ và tên người gửi" required>
+									<input type="text" name="shipping_address" class="shipping_address" placeholder="Địa chỉ gửi hàng" required>
+									<input type="text" name="shipping_phone" class="shipping_phone" placeholder="Số điện thoại" required>
+									<textarea name="shipping_notes" class="shipping_notes" placeholder="Ghi chú đơn hàng của bạn" rows="5" required></textarea>
 
 									@if(Session::get('fee'))
 										<input type="hidden" name="order_fee" class="order_fee" value="{{Session::get('fee')}}">
@@ -43,12 +43,10 @@
 										<input type="hidden" name="order_coupon" class="order_coupon" value="no">
 									@endif
 
-
-
-									<div class="">
+									<div style="display: none">
 										 <div class="form-group">
 		                                    <label for="exampleInputPassword1">Chọn hình thức thanh toán</label>
-		                                      <select name="shipping_method"  class="form-control input-sm m-bot15 shipping_method">
+		                                      <select id="che" name="shipping_method"  class="form-control input-sm m-bot15 shipping_method">
 		                                            <option value="0">COD</option>
                                                     <option value="1">Paypal</option>
                                                     <option value="2">Ngân lượng</option>
@@ -56,7 +54,6 @@
 		                                </div>
 									</div>
 
-									<input type="button" value="Xác nhận đơn hàng" name="send_order" class="btn btn-primary btn-sm send_order">
 								</form>
 
 							</div>
@@ -77,255 +74,249 @@
 
 							<form action="{{url('/update-cart')}}" method="POST">
 								@csrf
-							<table class="table table-condensed">
-								<thead>
-									<tr class="cart_menu">
-										<td class="image">Hình ảnh</td>
-										<td class="description">Tên sản phẩm</td>
-										<td class="price">Giá sản phẩm</td>
-										<td class="quantity">Số lượng</td>
-										<td class="total">Thành tiền</td>
-										<td></td>
-									</tr>
-								</thead>
-								<tbody>
-									@if(Session::get('cart')==true)
-									@php
-											$total = 0;
-											$itemList = array();
-									@endphp
-									@foreach(Session::get('cart') as $key => $cart)
+								<table class="table table-condensed">
+									<thead>
+										<tr class="cart_menu">
+											<td class="image">Hình ảnh</td>
+											<td class="description">Tên sản phẩm</td>
+											<td class="price">Giá sản phẩm</td>
+											<td class="quantity">Số lượng</td>
+											<td class="total">Thành tiền</td>
+											<td></td>
+										</tr>
+									</thead>
+									<tbody>
+										@if(Session::get('cart')==true)
 										@php
-											$subtotal = $cart['product_price']*$cart['product_qty'];
-											$total+=$subtotal;
-											$thisPriceToUSD = round($cart['product_price']/23200,2);
+												$total = 0;
+												$itemList = array();
 										@endphp
-										<?php
-											$subunit = ['value'=>$thisPriceToUSD.'','currency_code'=>'USD'];
-											$item = ['name'=>$cart['product_name'],'unit_amount'=>$subunit,'quantity'=>$cart['product_qty'] ];
-											array_push($itemList,$item);
+										@foreach(Session::get('cart') as $key => $cart)
+											@php
+												$subtotal = $cart['product_price']*$cart['product_qty'];
+												$total+=$subtotal;
+												$thisPriceToUSD = round($cart['product_price']/23200,2);
+											@endphp
+											<?php
+												$subunit = ['value'=>$thisPriceToUSD.'','currency_code'=>'USD'];
+												$item = ['name'=>$cart['product_name'],'unit_amount'=>$subunit,'quantity'=>$cart['product_qty'] ];
+												array_push($itemList,$item);
 
-										?>
+											?>
 
-									<tr>
-										<td class="cart_product">
-											<img src="{{asset('public/uploads/product/'.$cart['product_image'])}}" width="90" alt="{{$cart['product_name']}}" />
-										</td>
-										<td class="cart_description">
-											<h4><a href=""></a></h4>
-											<p>{{$cart['product_name']}}</p>
-										</td>
-										<td class="cart_price">
-											<p>{{number_format($cart['product_price'],0,',','.')}}đ</p>
-										</td>
-										<td class="cart_quantity">
-											<div class="cart_quantity_button">
-
-
-												<input class="cart_quantity" type="number" min="1" name="cart_qty[{{$cart['session_id']}}]" value="{{$cart['product_qty']}}"  >
+										<tr>
+											<td class="cart_product">
+												<img src="{{asset('public/uploads/product/'.$cart['product_image'])}}" width="90" alt="{{$cart['product_name']}}" />
+											</td>
+											<td class="cart_description">
+												<h4><a href=""></a></h4>
+												<p>{{$cart['product_name']}}</p>
+											</td>
+											<td class="cart_price">
+												<p>{{number_format($cart['product_price'],0,',','.')}}đ</p>
+											</td>
+											<td class="cart_quantity">
+												<div class="cart_quantity_button">
 
 
-											</div>
-										</td>
-										<td class="cart_total">
-											<p class="cart_total_price">
-												{{number_format($subtotal,0,',','.')}}đ
+													<input class="cart_quantity" type="number" min="1" name="cart_qty[{{$cart['session_id']}}]" value="{{$cart['product_qty']}}"  >
 
-											</p>
-										</td>
-										<td class="cart_delete">
-											<a class="cart_quantity_delete" href="{{url('/del-product/'.$cart['session_id'])}}"><i class="fa fa-times"></i></a>
-										</td>
-									</tr>
 
-									@endforeach
-									<tr>
-										<td><input type="submit" value="Cập nhật giỏ hàng" name="update_qty" class="check_out btn btn-default btn-sm"></td>
-										<td><a class="btn btn-default check_out" href="{{url('/del-all-product')}}">Xóa tất cả</a></td>
-										<td>
+												</div>
+											</td>
+											<td class="cart_total">
+												<p class="cart_total_price">
+													{{number_format($subtotal,0,',','.')}}đ
+
+												</p>
+											</td>
+											<td class="cart_delete">
+												<a class="cart_quantity_delete" href="{{url('/del-product/'.$cart['session_id'])}}"><i class="fa fa-times"></i></a>
+											</td>
+										</tr>
+
+										@endforeach
+										<tr>
+											<td><input type="submit" value="Cập nhật giỏ hàng" name="update_qty" class="check_out btn btn-default btn-sm"></td>
+											<td><a class="btn btn-default check_out" href="{{url('/del-all-product')}}">Xóa tất cả</a></td>
+											<td>
+												@if(Session::get('coupon'))
+												<a class="btn btn-default check_out" href="{{url('/unset-coupon')}}">Xóa mã khuyến mãi</a>
+												@endif
+											</td>
+
+
+											<td colspan="2">
+											<li>Tổng tiền :<span>{{number_format($total,0,',','.')}}đ</span></li>
 											@if(Session::get('coupon'))
-				                          	<a class="btn btn-default check_out" href="{{url('/unset-coupon')}}">Xóa mã khuyến mãi</a>
+											<li>
+
+													@foreach(Session::get('coupon') as $key => $cou)
+														@if($cou['coupon_condition']==1)
+															Mã giảm : {{$cou['coupon_number']}} %
+															<p>
+																@php
+																$total_coupon = ($total*$cou['coupon_number'])/100;
+
+																@endphp
+															</p>
+															<p>
+															@php
+																$total_after_coupon = $total-$total_coupon;
+															@endphp
+															</p>
+														@elseif($cou['coupon_condition']==2)
+															Mã giảm : {{number_format($cou['coupon_number'],0,',','.')}} k
+															<p>
+																@php
+																$total_coupon = $total - $cou['coupon_number'];
+
+																@endphp
+															</p>
+															@php
+																$total_after_coupon = $total_coupon;
+															@endphp
+														@endif
+													@endforeach
+
+
+
+											</li>
 											@endif
-										</td>
 
+											@if(Session::get('fee'))
+											<li>
+												<a class="cart_quantity_delete" href="{{url('/del-fee')}}"><i class="fa fa-times"></i></a>
 
-										<td colspan="2">
-										<li>Tổng tiền :<span>{{number_format($total,0,',','.')}}đ</span></li>
-										@if(Session::get('coupon'))
-										<li>
-
-												@foreach(Session::get('coupon') as $key => $cou)
-													@if($cou['coupon_condition']==1)
-														Mã giảm : {{$cou['coupon_number']}} %
-														<p>
-															@php
-															$total_coupon = ($total*$cou['coupon_number'])/100;
-
-															@endphp
-														</p>
-														<p>
-														@php
-															$total_after_coupon = $total-$total_coupon;
-														@endphp
-														</p>
-													@elseif($cou['coupon_condition']==2)
-														Mã giảm : {{number_format($cou['coupon_number'],0,',','.')}} k
-														<p>
-															@php
-															$total_coupon = $total - $cou['coupon_number'];
-
-															@endphp
-														</p>
-														@php
-															$total_after_coupon = $total_coupon;
-														@endphp
-													@endif
-												@endforeach
-
-
-
-										</li>
-										@endif
-
-										@if(Session::get('fee'))
-										<li>
-											<a class="cart_quantity_delete" href="{{url('/del-fee')}}"><i class="fa fa-times"></i></a>
-
-											Phí vận chuyển <span>{{number_format(Session::get('fee'),0,',','.')}}đ</span></li>
-											<?php $total_after_fee = $total + Session::get('fee'); ?>
-										@endif
-										<li>Tổng còn:
-                                        @php
-                                        $total_after = 0;
-											if(Session::get('fee') && !Session::get('coupon')){
-												$total_after = $total_after_fee;
-												echo number_format($total_after,0,',','.').'đ';
-											}elseif(!Session::get('fee') && Session::get('coupon')){
-												$total_after = $total_after_coupon;
-												echo number_format($total_after,0,',','.').'đ';
-											}elseif(Session::get('fee') && Session::get('coupon')){
-												$total_after = $total_after_coupon;
-												$total_after = $total_after + Session::get('fee');
-												echo number_format($total_after,0,',','.').'đ';
-											}elseif(!Session::get('fee') && !Session::get('coupon')){
-												$total_after = $total;
-												echo number_format($total_after,0,',','.').'đ';
-											}
-                                            $ta = $total_after;
-
-
-										@endphp
-										<div id="smart-button-container">
-											<div style="text-align: center;">
-											  <div id="paypal-button-container"></div>
-											</div>
-										  </div>
-                                            <!-- Paypal -->
-										<script src="https://www.paypal.com/sdk/js?client-id=AVygrTpVjXIDJKIEVU8JV37gni6-E0a-8lyTkEikYac46fQVLb-sQAF2ESbibX-NYRcv-MsUyMH78uvP&currency=USD" data-sdk-integration-source="button-factory"></script>
-										<script>
-										  function initPayPalButton() {
-
-											var gia = <?=json_encode($total_after)?>;
-											var list = <?=json_encode($itemList)?>;
-											var totalToUSD  =(gia/23200).toFixed(2)+"";
-											console.log(list);
-											console.log((gia/23200).toFixed(2));
-
-											paypal.Buttons({
-											  style: {
-												shape: 'pill',
-												color: 'gold',
-												layout: 'vertical',
-												label: 'paypal',
-
-											  },
-
-											  createOrder: function(data, actions) {
-												return actions.order.create({
-													purchase_units: [{
-														amount: {
-															value: totalToUSD,
-															currency_code: 'USD',
-															breakdown: {
-																item_total: {value: totalToUSD, currency_code: 'USD'}
-															}
-														},
-														items:list
-
-													}]
+												Phí vận chuyển <span>{{number_format(Session::get('fee'),0,',','.')}}đ</span></li>
+												<?php $total_after_fee = $total + Session::get('fee'); ?>
+											@endif
+											<li>Tổng còn:
+											@php
+											$total_after = 0;
+												if(Session::get('fee') && !Session::get('coupon')){
+													$total_after = $total_after_fee;
+													echo number_format($total_after,0,',','.').'đ';
+												}elseif(!Session::get('fee') && Session::get('coupon')){
+													$total_after = $total_after_coupon;
+													echo number_format($total_after,0,',','.').'đ';
+												}elseif(Session::get('fee') && Session::get('coupon')){
+													$total_after = $total_after_coupon;
+													$total_after = $total_after + Session::get('fee');
+													echo number_format($total_after,0,',','.').'đ';
+												}elseif(!Session::get('fee') && !Session::get('coupon')){
+													$total_after = $total;
+													echo number_format($total_after,0,',','.').'đ';
 												}
-												);
-											  },
+												$ta = $total_after;
 
-											  onApprove: function(data, actions) {
-												return actions.order.capture().then(function(details) {
-                                                  alert('Giao dịch được hoàn thành bởi ' + details.payer.name.given_name + '!');
-                                                  var shipping_email = $('.shipping_email').val();
-                                                  var shipping_name = $('.shipping_name').val();
-                                                  var shipping_address = $('.shipping_address').val();
-                                                  var shipping_phone = $('.shipping_phone').val();
-                                                  var shipping_notes = $('.shipping_notes').val();
-                                                  var shipping_method = $('.shipping_method').val();
-                                                  var order_fee = $('.order_fee').val();
-                                                  var order_coupon = $('.order_coupon').val();
-                                                  var _token = $('input[name="_token"]').val();
 
-                                                  $.ajax({
-                                                      url: '{{url('/confirm-order')}}',
-                                                      method: 'POST',
-                                                      data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
-                                                      success:function(){
-                                                         swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
-                                                      }
-                                                  });
+											@endphp
 
-                                                  window.setTimeout(function(){
-                                                      location.reload();
-                                                  } ,3000);
-												});
-											  },
+												<!-- Paypal -->
+											<script src="https://www.paypal.com/sdk/js?client-id=AVygrTpVjXIDJKIEVU8JV37gni6-E0a-8lyTkEikYac46fQVLb-sQAF2ESbibX-NYRcv-MsUyMH78uvP&currency=USD" data-sdk-integration-source="button-factory"></script>
+											<script>
+											function initPayPalButton() {
 
-											  onError: function(err) {
-												console.log(err);
-											  }
-											}).render('#paypal-button-container');
-										  }
-										  initPayPalButton();
-										</script>
-										<!-- End Paypal -->
+												var gia = <?=json_encode($total_after)?>;
+												var list = <?=json_encode($itemList)?>;
+												var totalToUSD  =(gia/23200).toFixed(2)+"";
+												console.log(list);
+												console.log((gia/23200).toFixed(2));
 
-										</li>
+												paypal.Buttons({
+												style: {
+													shape: 'pill',
+													color: 'gold',
+													layout: 'vertical',
+													label: 'paypal',
 
-									</td>
-									</tr>
-									@else
+												},
+
+												createOrder: function(data, actions) {
+													return actions.order.create({
+														purchase_units: [{
+															amount: {
+																value: totalToUSD,
+																currency_code: 'USD',
+																breakdown: {
+																	item_total: {value: totalToUSD, currency_code: 'USD'}
+																}
+															},
+															items:list
+
+														}]
+													}
+													);
+												},
+
+												onApprove: function(data, actions) {
+													return actions.order.capture().then(function(details) {
+													alert('Giao dịch được hoàn thành bởi ' + details.payer.name.given_name + '!');
+													var shipping_email = $('.shipping_email').val();
+													var shipping_name = $('.shipping_name').val();
+													var shipping_address = $('.shipping_address').val();
+													var shipping_phone = $('.shipping_phone').val();
+													var shipping_notes = $('.shipping_notes').val();
+													var shipping_method = $('.shipping_method').val();
+													var order_fee = $('.order_fee').val();
+													var order_coupon = $('.order_coupon').val();
+													var _token = $('input[name="_token"]').val();
+
+													$.ajax({
+														url: '{{url('/confirm-order')}}',
+														method: 'POST',
+														data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
+														success:function(){
+															swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
+														}
+													});
+
+													window.setTimeout(function(){
+														location.reload();
+													} ,3000);
+													});
+												},
+
+												onError: function(err) {
+													console.log(err);
+												}
+												}).render('#paypal-button-container');
+											}
+											initPayPalButton();
+											</script>
+											<!-- End Paypal -->
+
+											</li>
+
+										</td>
+										</tr>
+										@else
+										<tr>
+											<td colspan="5"><center>
+											@php
+											echo 'Làm ơn thêm sản phẩm vào giỏ hàng';
+											@endphp
+											</center></td>
+										</tr>
+										@endif
+									</tbody>
+
+									@if(Session::get('cart'))
 									<tr>
-										<td colspan="5"><center>
-										@php
-										echo 'Làm ơn thêm sản phẩm vào giỏ hàng';
-										@endphp
-										</center></td>
+										<td>
+											<form method="POST" action="{{url('/check-coupon')}}">
+												@csrf
+												<input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
+												<input type="submit" class="btn btn-default check_coupon" name="check_coupon" value="Tính mã giảm giá">
+											</form>
+										</td>
 									</tr>
 									@endif
-								</tbody>
 
 
-
+								</table>
 							</form>
-								@if(Session::get('cart'))
-								<tr><td>
-
-										<form method="POST" action="{{url('/check-coupon')}}">
-											@csrf
-												<input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
-				                          		<input type="submit" class="btn btn-default check_coupon" name="check_coupon" value="Tính mã giảm giá">
-
-			                          		</form>
-			                          	</td>
-								</tr>
-								@endif
-
-							</table>
 
 						</div>
 					</div>
@@ -333,27 +324,21 @@
 				</div>
             </div>
             <div>
-
-                <div class="container">
-                    <div class="header clearfix">
-                        <h3 class="text-muted">Thanh toán với Vnpay</h3>
-                    </div>
-                    <h3>Xác Nhận đơn hàng</h3>
                     <div class="table-responsive">
                         <form action="{{URL::to('/create')}}" id="create_form" method="post">
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
                                 <label for="language"></label>
                                 <select name="order_type" id="order_type" class="form-control">
                                     <option value="topup">Thanh toán</option>
 
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
                                 <label for="order_id">Mã hóa đơn</label>
                                 <input class="form-control" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
 
                                 <label for="amount">Tổng tiền</label>
                                 <input class="form-control" id="amount"
@@ -361,11 +346,11 @@
 
 
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
                                 <label for="order_desc">Ghi Chú</label>
                                 <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">Nội dung</textarea>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
                                 <label for="bank_code">Ngân hàng</label>
                                 <select name="bank_code" id="bank_code" class="form-control">
                                     <option value="">Không chọn</option>
@@ -393,19 +378,25 @@
                                     <option value="VISA"> Thanh toan qua VISA/MASTER</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
                                 <label for="language">Ngôn ngữ</label>
                                 <select name="language" id="language" class="form-control">
                                     <option value="vn">Tiếng Việt</option>
                                     <option value="en">English</option>
                                 </select>
                             </div>
-
-
-                            <input type="submit" value="Xác nhận đơn hàng" name="send_order" id="btnPopup"  class="btn btn-primary btn-sm send_order">
-
+							<div class="col-md-4">
+								<input type="button" value="Thanh toán trực tiếp" name="send_order" class="btn btn-primary btn-sm send_order">
+							</div>
+							<div class="col-md-4">
+								<input type="submit" value="Thanh toán qua VNPay" name="send_order" id="btnPopup"  class="btn btn-primary btn-sm send_order">
+							</div>
+							<div class="col-md-4" id="smart-button-container">
+								<div style="text-align: center;">
+									<div id="paypal-button-container"></div>
+								</div>
+							</div>
                         </form>
-                    </div>
 
                 </div>
                 <link href="https://sandbox.vnpayment.vn/paymentv2/lib/vnpay/vnpay.css" rel="stylesheet"/>
@@ -414,7 +405,6 @@
                     $("#btnPopup").click(function () {
                         var postData = $("#create_form").serialize();
                         var submitUrl = $("#create_form").attr("action");
-                        return redirect::to($url);
                         $.ajax({
                             type: "POST",
                             url: submitUrl,
@@ -443,7 +433,6 @@
 
 
 
-		</div>
-	</section> <!--/#cart_items-->
 
+	</section> <!--#cart_items-->
 @endsection
